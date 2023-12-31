@@ -16,4 +16,9 @@ export default class TopicService {
             });
 
     }
+
+    static async getTopicById(id){
+        const response = await axios.get('http://localhost:8080/topics/' + id)
+        return response;
+    }
 }

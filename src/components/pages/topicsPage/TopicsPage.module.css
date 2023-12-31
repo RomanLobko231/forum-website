@@ -4,9 +4,3 @@
     align-items: center;
 }
 
-.topics__container {
-    padding: 20px 5px;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-}

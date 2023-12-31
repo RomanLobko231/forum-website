@@ -1,7 +1,7 @@
 import { useState } from "react";
 import cl from "./TopicModal.module.css"
 
-const TopicModal = ({ visible, setVisible,  createTopic}) => {
+const TopicModal = ({ visible, setVisible, createTopic }) => {
 
   const [topic, setTopic] = useState({ title: '', description: '' })
   const rootClasses = [cl.modal]
@@ -13,28 +13,31 @@ const TopicModal = ({ visible, setVisible,  createTopic}) => {
   const createNewTopic = (e) => {
     e.preventDefault()
     createTopic(topic)
-    setTopic({title: '', description: ''})
+    setTopic({ title: '', description: '' })
     setVisible(false)
   }
 
   return (
     <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
       <div className={cl.modalContent} onClick={(e) => e.stopPropagation()}>
-        <form className={cl.topic__form} onSubmit={createNewTopic}>
-          <input
+        <div className={cl.topic__form} >
+          <label style={{marginTop: '4%'}} htmlFor="title">Title</label>
+          <input className={cl.title__input}
+          id="title"
             type="text"
             value={topic.title}
             onChange={(e) => setTopic({ ...topic, title: e.target.value })}
             placeholder="Topic Title"
           />
-          <input
-            type="text"
+          <label htmlFor="description">Description</label>
+          <textarea className={cl.description__input}
+            id="description"
             value={topic.description}
             onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
           />
-          <button type="submit" >Post</button>
-        </form>
+          <button onClick={createNewTopic} >Post</button>
+        </div>
 
       </div>
     </div>

@@ -3,35 +3,41 @@ import cl from "./TopicsPage.module.css"
 import TopicModal from "../../UI/modal/TopicModal";
 import TopicsHeader from "../../UI/topicsHeader/TopicsHeader";
 import TopicService from "../../../API/TopicService";
-import Topic from "../../UI/topic/Topic";
+import TopicsList from "../../UI/topicsList/TopicsList";
+import { useFetching } from "../../../hooks/useFetching";
+import { TailSpin } from "react-loader-spinner";
+import { useSorting } from "../../../hooks/useSorting";
 
 const TopicsPage = () => {
 
   const [modalVisible, setModalVisible] = useState(false)
   const [topics, setTopics] = useState([])
+  const [filter, setFilter] = useState({sort: '', query: ''})
+  const sortedTopics = useSorting(topics, filter.sort, filter.query)
 
-  useEffect( () => {
-    async function fetchTopics(){
-      const response = await TopicService.getAll();
-    setTopics(response.data)
+  const [fetchTopics, isLoading, error] = useFetching(async () => {
+    const response = await TopicService.getAll();
     console.log(response.data)
-    }
+    setTopics(response.data)
+  })
+
+  useEffect(() => {
     fetchTopics()
   }, [])
 
-  const createTopic = (topic) => {
-    TopicService.createNewTopic(topic)
+  const createTopic = async (topic) => {
+    await TopicService.createNewTopic(topic)
+    fetchTopics()
   }
 
   return (
     <div className={cl.upper__container}>
       <TopicModal visible={modalVisible} setVisible={setModalVisible} createTopic={createTopic} />
-      <TopicsHeader setVisible={setModalVisible} />
-      <div className={cl.topics__container}>
-        {topics.map(topic =>
-          <Topic title={topic.title} description={topic.description} key={topic.title}/>
-        )}
-      </div>
+      <TopicsHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible} />
+      {isLoading 
+      ? <TailSpin color="#f1f9fc" radius="28px"/>
+      : <TopicsList topics={sortedTopics} />
+      }
     </div>
 
   );

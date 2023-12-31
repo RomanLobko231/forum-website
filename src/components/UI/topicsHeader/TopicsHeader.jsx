@@ -1,10 +1,27 @@
+import SortSelect from "../select/SortSelect";
 import cl from "./TopicsHeader.module.css"
 
-const TopicsHeader = ({setVisible}) => {
+const TopicsHeader = ({filter, setFilter, setVisible}) => {
   return (
-    <div>
+    <div className={cl.container}>
       <h1>General</h1>
-      <h2 className={cl.create__text} onClick={() => setVisible(true)}>Create new topic</h2>
+      <div className={cl.actions__container}>
+        <SortSelect 
+        value={filter.sort}
+        defaultValue="Sort By"
+        options={[
+            {value: 'numberOfMessages', name: 'Messages'},
+            {value: 'likes', name: 'Most Liked'}
+        ]}
+        onChange={selectedSort => setFilter({...filter, sort: selectedSort})}/>
+        <input className={cl.query__input}
+        type="text"
+        value={filter.query}
+        onChange={e => setFilter({...filter, query: e.target.value})}
+        placeholder="Search"
+        />
+        <button className={cl.create__button} onClick={() => setVisible(true)}>Create new</button>
+      </div>
     </div>
   );
 };
