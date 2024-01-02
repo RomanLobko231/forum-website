@@ -1,0 +1,13 @@
+.container {
+    padding: 4px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.element{
+    display: flex;
+    flex-direction: row;
+    gap: 4%;
+    align-items: center;
+}

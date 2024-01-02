@@ -12,6 +12,7 @@ const TopicIdPage = () => {
     const [fetchMessages, isLoading, error] = useFetching(async () => {
         const response = await TopicService.getTopicById(params.id);
         setMessages(response.data.messages)
+        console.log(response.data)
     })
 
     useEffect(() => {
