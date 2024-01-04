@@ -32,7 +32,7 @@ const TopicsPage = () => {
   }
 
   return (
-    <LikeDislikeContext.Provider value={{fetchTopics}}>
+    
       <div className={cl.upper__container}>
         <TopicModal visible={modalVisible} setVisible={setModalVisible} createTopic={createTopic} />
         <TopicsHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible} />
@@ -41,7 +41,7 @@ const TopicsPage = () => {
           : <TopicsList topics={sortedTopics} />
         }
       </div>
-    </LikeDislikeContext.Provider>
+   
   );
 };
 

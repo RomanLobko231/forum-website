@@ -4,32 +4,37 @@ import { useEffect, useState } from "react";
 import { useFetching } from "../../../hooks/useFetching";
 import MessagesList from "../../UI/messagesList/MessagesList";
 import { Hourglass, TailSpin } from "react-loader-spinner";
+import MessageModal from "../../UI/messageModal/MessageModal";
+import cl from "./TopicIdPage.module.css"
 
 const TopicIdPage = () => {
 
     const params = useParams()
     const [messages, setMessages] = useState([])
+    const [modalVisible, setModalVisible] = useState(false)
     const [fetchMessages, isLoading, error] = useFetching(async () => {
         const response = await TopicService.getTopicById(params.id);
         setMessages(response.data.messages)
         console.log(response.data)
     })
+    
 
     useEffect(() => {
         fetchMessages()
     }, [])
 
-
-    if (!messages.length) {
-        return (
-            <h1 style={{ textAlign: "center" }}>
-                No messages yet!
-            </h1>
-        )
+    const createMessage = async (message) => {
+        await TopicService.createNewMessage(message, params.id)
+        fetchMessages()
     }
+    
+
+    
 
     return (
-        <div>
+        <div className={cl.container}>
+            <button className={cl.create__button} onClick={() => setModalVisible(true)}>Create new</button>
+            <MessageModal visible={modalVisible} setVisible={setModalVisible} createMessage={createMessage}/>
             {isLoading 
             ? <TailSpin
             visible={true}

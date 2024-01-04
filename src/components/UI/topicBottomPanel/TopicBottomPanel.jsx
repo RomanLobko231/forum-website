@@ -4,59 +4,72 @@ import TopicService from "../../../API/TopicService";
 import { useCallback, useContext, useState } from "react";
 import { LikeDislikeContext } from "../../../context";
 
-const TopicBottomPanel = ({topic}) => {
+const TopicBottomPanel = ({ topic }) => {
 
   const [isLiked, setIsLiked] = useState(false)
   const [isDisliked, setIsDisliked] = useState(false)
   const [likes, setLikes] = useState(topic.likes)
-  const {fetchTopics} = useContext(LikeDislikeContext)
+  const [dislikes, setDislikes] = useState(topic.dislikes)
 
   const setLike = async () => {
     const updatedLikes = isLiked ? Math.max(likes - 1, 0) : topic.likes + 1;
-    setIsLiked(!isLiked);
+    const updatedDislikes = isDisliked ? dislikes - 1 : topic.dislikes
 
-    try{
-      await TopicService.updateTopic({...topic, likes: updatedLikes });
+    try {
+      await TopicService.updateTopic({ ...topic, likes: updatedLikes, dislikes: updatedDislikes});
+
+      setIsDisliked(false)
+      setDislikes(updatedDislikes)
+
+      setIsLiked(!isLiked)
       setLikes(updatedLikes)
-      // fetchTopics()
-    }catch (e){
-        console.log(e)
-        setIsLiked(isLiked)
+    } catch (e) {
+      console.log(e)
+      setIsLiked(isLiked)
+      setIsDisliked(isDisliked)
     }
   }
 
-  const setDislike = useCallback(async () => {
-    const updatedDislikes = isDisliked ? Math.max(topic.dislikes - 1, 0) : topic.dislikes + 1;
-    setIsDisliked(!isDisliked);
-    try{
-      await TopicService.updateTopic({...topic, dislikes: updatedDislikes})
-      fetchTopics()    
-    }catch (e){
-        console.log(e)
-        setIsDisliked(isDisliked)
+  const setDislike = async () => {
+
+    const updatedLikes = isLiked ? likes - 1 : topic.likes
+    const updatedDislikes = isDisliked ? Math.max(dislikes - 1, 0) : topic.dislikes + 1;
+
+    try {
+      await TopicService.updateTopic({ ...topic, dislikes: updatedDislikes, likes: updatedLikes })
+
+      setIsLiked(false)
+      setLikes(updatedLikes)
+
+      setIsDisliked(!isDisliked)
+      setDislikes(updatedDislikes)
+    } catch (e) {
+      console.log(e)
+      setIsDisliked(isDisliked)
+      setIsLiked(isLiked)
     }
-  }, [])
-//TODO: only registered users can like or dislike
+  }
+  //TODO: only registered users can like or dislike
   return (
     <div className={cl.container}>
-        <div className={cl.element}>
-        {isLiked 
-            ?  <BiSolidLike onClick={setLike}/>
-            :  <BiLike onClick={setLike}/>
-            }
+      <div className={cl.element}>
+        {isLiked
+          ? <BiSolidLike onClick={setLike} />
+          : <BiLike onClick={setLike} />
+        }
         <p>{likes}</p>
-        </div>
-        <div className={cl.element}>
-          {isDisliked
-          ? <BiSolidDislike onClick={setDislike}/>
-          : <BiDislike onClick={setDislike}/>
-          }
-        <p>{topic.dislikes}</p>
-        </div>
-        <div className={cl.element}>
-        <BiCommentDetail/>
+      </div>
+      <div className={cl.element}>
+        {isDisliked
+          ? <BiSolidDislike onClick={setDislike} />
+          : <BiDislike onClick={setDislike} />
+        }
+        <p>{dislikes}</p>
+      </div>
+      <div className={cl.element}>
+        <BiCommentDetail />
         <p>{topic.numberOfMessages}</p>
-        </div>
+      </div>
     </div>
   );
 };

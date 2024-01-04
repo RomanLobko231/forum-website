@@ -17,9 +17,25 @@ export default class TopicService {
 
     }
 
+    static async createNewMessage(message, topicId) {
+        await axios.post('http://localhost:8080/topics/' + topicId + '/messages', {message: message})
+        .then(function (response) {
+            console.log(response);
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+    }
+
     static async getTopicById(id) {
-        const response = await axios.get('http://localhost:8080/topics/' + id)
-        return response;
+        const topic = await axios.get('http://localhost:8080/topics/' + id)
+        .then((response) => {
+            return response;
+        })
+        .catch((error) => {
+            console.log(error)
+        });
+        return topic;
     }
 
     static async updateTopic(topic) {
