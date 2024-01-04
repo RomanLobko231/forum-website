@@ -9,7 +9,7 @@ const Topic = ({ topic }) => {
     navigate("/topics/" + topic.id)
   }
 
-
+  
 
   return (
     <div className={cl.topic__card}>
@@ -22,7 +22,7 @@ const Topic = ({ topic }) => {
           <p className={cl.description}>{topic.description}</p>
         </div>
       </div>
-      <TopicBottomPanel/>
+      <TopicBottomPanel topic={topic} />
     </div>
 
   );
