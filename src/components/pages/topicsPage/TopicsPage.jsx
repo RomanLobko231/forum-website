@@ -18,8 +18,8 @@ const TopicsPage = () => {
 
   const [fetchTopics, isLoading, error] = useFetching(async () => {
     const response = await TopicService.getAll();
-    console.log(response.data)
     setTopics(response.data)
+    console.log(response.data)
   })
 
   useEffect(() => {

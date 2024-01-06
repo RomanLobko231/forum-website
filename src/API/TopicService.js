@@ -44,7 +44,8 @@ export default class TopicService {
             description: topic.description,
             likes: topic.likes,
             dislikes: topic.dislikes,
-            id: topic.id
+            id: topic.id,
+            timeCreated: topic.timeCreated
         }
         await axios.put('http://localhost:8080/topics', newTopic)
         .then((response) => {

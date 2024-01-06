@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MessageModal from "../messageModal/MessageModal";
 import cl from "./MessagesList.module.css"
+import Message from "../message/Message";
 
 const MessagesList = ({messages}) => {
     
@@ -9,7 +10,7 @@ const MessagesList = ({messages}) => {
     <div className={cl.container}>
     
       {messages.map(mess => 
-                <p>{mess.message}</p>
+                <Message message={mess} key={mess.id}/>
             )}
     </div>
   );

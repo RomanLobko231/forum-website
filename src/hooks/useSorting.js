@@ -12,7 +12,7 @@ export const useSorting = (topics, sort, query) => {
 export const useSortTopics = (topics, sort) => {
     const sortedTopics = useMemo(() => {
         if (sort) {
-          return [...topics].sort((b, a) => a[sort].toString().localeCompare(b[sort].toString()));
+          return [...topics].sort((a, b) => b[sort] - a[sort]);
         }
         return topics;
       }, [sort, topics])

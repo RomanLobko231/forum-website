@@ -6,16 +6,20 @@ import MessagesList from "../../UI/messagesList/MessagesList";
 import { Hourglass, TailSpin } from "react-loader-spinner";
 import MessageModal from "../../UI/messageModal/MessageModal";
 import cl from "./TopicIdPage.module.css"
+import TopicDescription from "../../UI/topicDescription/TopicDescription";
+import MessagesPageDetails from "../../UI/messagesPageDetails/MessagesPageDetails";
 
 const TopicIdPage = () => {
 
     const params = useParams()
+    const [topic, setTopic] = useState({});
     const [messages, setMessages] = useState([])
     const [modalVisible, setModalVisible] = useState(false)
     const [fetchMessages, isLoading, error] = useFetching(async () => {
-        const response = await TopicService.getTopicById(params.id);
-        setMessages(response.data.messages)
-        console.log(response.data)
+        const topic = await TopicService.getTopicById(params.id);
+        setTopic(topic.data)
+        setMessages(topic.data.messages)
+        error == null ? console.log(error) : console.log(topic)
     })
     
 
@@ -33,7 +37,7 @@ const TopicIdPage = () => {
 
     return (
         <div className={cl.container}>
-            <button className={cl.create__button} onClick={() => setModalVisible(true)}>Create new</button>
+            
             <MessageModal visible={modalVisible} setVisible={setModalVisible} createMessage={createMessage}/>
             {isLoading 
             ? <TailSpin
@@ -46,7 +50,7 @@ const TopicIdPage = () => {
             wrapperStyle={{}}
             wrapperClass=""
             />
-            : <MessagesList messages={messages}/>
+            : <MessagesPageDetails messages={messages} topic={topic} setModalVisible={setModalVisible}/>
             }
         </div>
     );
