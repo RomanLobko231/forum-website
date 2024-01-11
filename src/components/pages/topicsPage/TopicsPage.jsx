@@ -8,6 +8,7 @@ import { useFetching } from "../../../hooks/useFetching";
 import { TailSpin } from "react-loader-spinner";
 import { useSorting } from "../../../hooks/useSorting";
 import { LikeDislikeContext } from "../../../context";
+import { useNavigate } from "react-router-dom";
 
 const TopicsPage = () => {
 
@@ -22,13 +23,21 @@ const TopicsPage = () => {
     console.log(response.data)
   })
 
+  const navigate = useNavigate()
+
+  const navigateToTopic = (id) => {
+    navigate("/topics/" + id)
+  }
+
+
   useEffect(() => {
     fetchTopics()
   }, [])
 
   const createTopic = async (topic) => {
-    await TopicService.createNewTopic(topic)
-    fetchTopics()
+    const response = await TopicService.createNewTopic(topic)
+    const id = response.data.id
+    navigateToTopic(id)
   }
 
   return (

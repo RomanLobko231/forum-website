@@ -19,7 +19,7 @@ const TopicIdPage = () => {
         const topic = await TopicService.getTopicById(params.id);
         setTopic(topic.data)
         setMessages(topic.data.messages)
-        error == null ? console.log(error) : console.log(topic)
+        error != null ? console.log(error) : console.log(topic)
     })
     
 

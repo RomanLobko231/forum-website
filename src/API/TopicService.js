@@ -7,18 +7,18 @@ export default class TopicService {
     }
 
     static async createNewTopic(data) {
-        await axios.post('http://localhost:8080/topics', data, {
+        const response = await axios.post('http://localhost:8080/topics', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
         })
             .then(function (response) {
-                console.log(response);
+                return response;
             })
             .catch(function (error) {
                 console.log(error);
             });
-
+            return response;
     }
 
     static async createNewMessage(message, topicId) {

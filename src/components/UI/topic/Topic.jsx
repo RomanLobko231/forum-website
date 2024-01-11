@@ -10,7 +10,7 @@ const Topic = ({ topic }) => {
     navigate("/topics/" + topic.id)
   }
 
-  const [data, setData] = useState(topic.image) 
+  const data = topic.image == null ? null : topic.image
 
   return (
     <div className={cl.topic__card}>

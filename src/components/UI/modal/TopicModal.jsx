@@ -4,12 +4,14 @@ import cl from "./TopicModal.module.css"
 const TopicModal = ({ visible, setVisible, createTopic }) => {
 
   const [topic, setTopic] = useState({title: '', description: ''})
-  const [image, setImage] = useState(null)
+  const [images, setImages] = useState([])
+  
   const rootClasses = [cl.modal]
 
   if (visible) {
     rootClasses.push(cl.active);
   }
+  
 
   const createNewTopic = (e) => {
     e.preventDefault() 
@@ -17,10 +19,13 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
       type: 'application/json'
     })
     const data = new FormData();
-    data.append('image', image);
+    images.forEach(image => {
+      data.append(`images`, image);
+    });
     data.append('topic', blob);
     createTopic(data)
     setTopic({ title: '', description: ''})
+    setImages([])
     setVisible(false)
   }
 
@@ -43,7 +48,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
           />
-          <input type="file" onChange={(e) => setImage(e.target.files[0])}/>
+          <input type="file" multiple accept="image/*" onChange={(e) => setImages([...images, ...e.target.files])}/>
           <button onClick={createNewTopic} >Post</button>
         </div>
 
