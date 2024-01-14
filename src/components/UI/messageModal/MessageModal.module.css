@@ -13,8 +13,8 @@
     padding: 15px;
     background: rgb(241, 249, 252);
     border-radius: 16px;
-    width: 550px;
-    height: 450px;
+    width: 500px;
+    height: 350px;
 }
 
 .modal.active {
@@ -31,21 +31,13 @@
     height: 100%;
 }
 
-.title__input{
-    width: 80%;
-    height: 10%;
-    margin-bottom: 4%;
-    font-size: 18px;
-    border-radius: 16px;
-}
-
 .description__input{
     border-radius: 8px;
     padding: 4px;
-    min-width: 80%;
-    min-height: 50%;
+    min-width: 90%;
+    height: 80%;
     max-width: 80%;
-    max-height: 50%;
+    max-height: 80%;
     margin-bottom: 4%;
-
+    padding: 12px;
 }

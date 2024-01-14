@@ -8,13 +8,16 @@ import MessageModal from "../../UI/messageModal/MessageModal";
 import cl from "./TopicIdPage.module.css"
 import TopicDescription from "../../UI/topicDescription/TopicDescription";
 import MessagesPageDetails from "../../UI/messagesPageDetails/MessagesPageDetails";
+import ImageModal from "../../UI/imageModal/ImageModal";
 
 const TopicIdPage = () => {
 
     const params = useParams()
     const [topic, setTopic] = useState({});
     const [messages, setMessages] = useState([])
-    const [modalVisible, setModalVisible] = useState(false)
+    const [messageModal, setMessageModal] = useState(false)
+    const [imageModal, setImageModal] = useState(false)
+    const [imageSrc, setImageSrc] = useState("")
     const [fetchMessages, isLoading, error] = useFetching(async () => {
         const topic = await TopicService.getTopicById(params.id);
         setTopic(topic.data)
@@ -31,14 +34,20 @@ const TopicIdPage = () => {
         await TopicService.createNewMessage(message, params.id)
         fetchMessages()
     }
+
+    const setImage = (src) => {
+        setImageModal(!imageModal)
+        setImageSrc(src) 
+        console.log(src)
+    }
     
 
     
 
     return (
         <div className={cl.container}>
-            
-            <MessageModal visible={modalVisible} setVisible={setModalVisible} createMessage={createMessage}/>
+            <MessageModal visible={messageModal} setVisible={setMessageModal} createMessage={createMessage}/>
+            <ImageModal visible={imageModal} setVisible={setImageModal} image={imageSrc}/>
             {isLoading 
             ? <TailSpin
             visible={true}
@@ -50,7 +59,7 @@ const TopicIdPage = () => {
             wrapperStyle={{}}
             wrapperClass=""
             />
-            : <MessagesPageDetails messages={messages} topic={topic} setModalVisible={setModalVisible}/>
+            : <MessagesPageDetails messages={messages} topic={topic} setMessageModal={setMessageModal} setImage={setImage}/>
             }
         </div>
     );

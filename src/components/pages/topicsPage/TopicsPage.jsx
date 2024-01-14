@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import cl from "./TopicsPage.module.css"
-import TopicModal from "../../UI/modal/TopicModal";
+import TopicModal from "../../UI/topicModal/TopicModal";
 import TopicsHeader from "../../UI/topicsHeader/TopicsHeader";
 import TopicService from "../../../API/TopicService";
 import TopicsList from "../../UI/topicsList/TopicsList";
@@ -46,7 +46,16 @@ const TopicsPage = () => {
         <TopicModal visible={modalVisible} setVisible={setModalVisible} createTopic={createTopic} />
         <TopicsHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible} />
         {isLoading
-          ? <TailSpin color="#f1f9fc" radius="28px" />
+          ? <TailSpin
+          visible={true}
+          height="80"
+          width="80"
+          color="#4fa94d"
+          ariaLabel="tail-spin-loading"
+          radius="1"
+          wrapperStyle={{}}
+          wrapperClass=""
+          />
           : <TopicsList topics={sortedTopics} />
         }
       </div>

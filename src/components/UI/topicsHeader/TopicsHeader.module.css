@@ -18,12 +18,12 @@
 }
 
 .create__button {
+  border: 1px solid #4285f4;
   align-items: center;
   appearance: none;
   background-color: #fff;
   border-radius: 24px;
-  border-style: none;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 4px 8px rgba(27, 35, 59, 0.10);
   box-sizing: border-box;
   color: #3c4043;
   cursor: pointer;
@@ -52,9 +52,9 @@
 }
 
 .create__button:hover {
-  background: #edf4fc;
-  color: #34373a;
-  font-weight: 700;
+  background: #2c425f;
+  color: #fcd0c2;
+  font-weight: 600;
 }
 
 .create__button:active {
@@ -64,5 +64,22 @@
 
 .create__button:focus {
   outline: none;
-  border: 2px solid #4285f4;
+  border: 1px solid #2c425f;
 }
+
+.query__input{
+  border-radius: 8px;
+  box-shadow: 0px 4px 8px rgba(27, 35, 59, 0.10);
+  outline: none;
+  border: 1px solid #4285f4;
+  padding-left: 12px;
+}
+
+.query__input:focus {
+  box-shadow: 0px 4px 6px rgba(42, 54, 92, 0.35);
+  outline: none;
+  border: 1px solid #2c425f;
+  border-radius: 24px;
+}
+
+

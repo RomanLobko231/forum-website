@@ -2,7 +2,7 @@ import cl from './Message.module.css'
 
 const Message = ({message}) => {
 
-    const formattedCreatedDate = message.timeCreated == null ? "null" : new Date(message.timeCreated).toLocaleString('en-US', {
+    const formattedCreatedDate = message.timeCreated == null ? "null" : new Date(message.timeCreated).toLocaleString('en-UK', {
         year: 'numeric',
         month: '2-digit',
         day: '2-digit',
@@ -14,7 +14,7 @@ const Message = ({message}) => {
   return (
     <div className={cl.container}>
       <div>
-        <p className={cl.header__text}>{formattedCreatedDate}     id:{message.id}</p>
+        <p className={cl.header__text}>{formattedCreatedDate}<br/>id:{message.id}</p>
         <p className={cl.message__content}>{message.message}</p>
       </div>
     </div>

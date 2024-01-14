@@ -1,5 +1,6 @@
 import { useState } from "react";
 import cl from "./TopicModal.module.css"
+import Modal from "../modal/Modal";
 
 const TopicModal = ({ visible, setVisible, createTopic }) => {
 
@@ -24,18 +25,29 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
     });
     data.append('topic', blob);
     createTopic(data)
-    setTopic({ title: '', description: ''})
+
+    setTopic({title: '', description: ''})
     setImages([])
     setVisible(false)
   }
 
+
+  const checkAndSetImages = (e) => {
+   if(e.target.files.length > 3) {
+    alert("Max 3 images allowed, sorry")
+    setImages([])
+   } else {
+    setImages([...images, ...e.target.files])
+   }
+  }
+
   return (
-    <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
+    <Modal visible={visible} setVisible={setVisible} content={
       <div className={cl.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={cl.topic__form} >
           <label style={{marginTop: '4%'}} htmlFor="title">Title</label>
           <input className={cl.title__input}
-          id="title"
+           id="title"
             type="text"
             value={topic.title}
             onChange={(e) => setTopic({ ...topic, title: e.target.value })}
@@ -48,12 +60,13 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
           />
-          <input type="file" multiple accept="image/*" onChange={(e) => setImages([...images, ...e.target.files])}/>
+          <div>
+          <input type="file" multiple accept="image/*" onChange={checkAndSetImages}/>
           <button onClick={createNewTopic} >Post</button>
+          </div>
         </div>
-
       </div>
-    </div>
+    }/>
   );
 };
 
