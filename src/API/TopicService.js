@@ -42,17 +42,11 @@ export default class TopicService {
         return topic;
     }
 
-    static async updateTopic(topic) {
-        const newTopic = {
-            title: topic.title,
-            description: topic.description,
-            likes: topic.likes,
-            dislikes: topic.dislikes,
-            id: topic.id,
-            image: topic.image,
-            timeCreated: topic.timeCreated
-        }
-        await axios.put('http://localhost:8080/topics', newTopic)
+    static async updateLikesDislikes({likes, dislikes, id}) {
+        console.log(id)
+        console.log(likes)
+        console.log(dislikes)
+        await axios.put('http://localhost:8080/topics/likes-dislikes', {likes: likes, dislikes: dislikes, id: id})
             .then((response) => {
                 console.log(response)
             })

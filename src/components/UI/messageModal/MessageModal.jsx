@@ -28,7 +28,7 @@ const MessageModal = ({visible, setVisible, createMessage}) => {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Message"
             />
-            <button onClick={createNewMessage} >Post</button>
+            <button className={cl.create__button} onClick={createNewMessage} >Post</button>
           </div>
   
         </div>

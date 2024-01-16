@@ -15,13 +15,13 @@ const TopicsPage = () => {
   const [modalVisible, setModalVisible] = useState(false)
   const [topics, setTopics] = useState([])
   const [filter, setFilter] = useState({ sort: '', query: '' })
-  const sortedTopics = useSorting(topics, filter.sort, filter.query)
 
   const [fetchTopics, isLoading, error] = useFetching(async () => {
     const response = await TopicService.getAll();
     setTopics(response.data)
     console.log(response.data)
   })
+  const sortedTopics = useSorting(topics, filter.sort, filter.query)
 
   const navigate = useNavigate()
 

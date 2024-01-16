@@ -13,7 +13,7 @@ import ImageModal from "../../UI/imageModal/ImageModal";
 const TopicIdPage = () => {
 
     const params = useParams()
-    const [topic, setTopic] = useState({});
+    const [topic, setTopic] = useState(null);
     const [messages, setMessages] = useState([])
     const [messageModal, setMessageModal] = useState(false)
     const [imageModal, setImageModal] = useState(false)

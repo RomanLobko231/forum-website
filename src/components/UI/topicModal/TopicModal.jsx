@@ -1,6 +1,7 @@
 import { useState } from "react";
 import cl from "./TopicModal.module.css"
 import Modal from "../modal/Modal";
+import ImageInput from "../imageInput/ImageInput";
 
 const TopicModal = ({ visible, setVisible, createTopic }) => {
 
@@ -33,7 +34,8 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
 
 
   const checkAndSetImages = (e) => {
-   if(e.target.files.length > 3) {
+    const totalImages = images.length + e.target.files.length
+   if(totalImages > 3 ) {
     alert("Max 3 images allowed, sorry")
     setImages([])
    } else {
@@ -60,8 +62,9 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
           />
+                    <ImageInput checkAndSetImages={checkAndSetImages} imagesCount={ima}/>
+
           <div>
-          <input type="file" multiple accept="image/*" onChange={checkAndSetImages}/>
           <button onClick={createNewTopic} >Post</button>
           </div>
         </div>

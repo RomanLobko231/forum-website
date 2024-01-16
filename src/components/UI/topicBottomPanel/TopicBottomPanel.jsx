@@ -16,7 +16,7 @@ const TopicBottomPanel = ({ topic }) => {
     const updatedDislikes = isDisliked ? dislikes - 1 : topic.dislikes
 
     try {
-      await TopicService.updateTopic({ ...topic, likes: updatedLikes, dislikes: updatedDislikes});
+      await TopicService.updateLikesDislikes({likes: updatedLikes, dislikes: updatedDislikes, id: topic.id});
 
       setIsDisliked(false)
       setDislikes(updatedDislikes)
@@ -36,7 +36,7 @@ const TopicBottomPanel = ({ topic }) => {
     const updatedDislikes = isDisliked ? Math.max(dislikes - 1, 0) : topic.dislikes + 1;
 
     try {
-      await TopicService.updateTopic({ ...topic, dislikes: updatedDislikes, likes: updatedLikes })
+      await TopicService.updateLikesDislikes({likes: updatedLikes, dislikes: updatedDislikes, id: topic.id});
 
       setIsLiked(false)
       setLikes(updatedLikes)
