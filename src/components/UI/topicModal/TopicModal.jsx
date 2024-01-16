@@ -7,6 +7,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
 
   const [topic, setTopic] = useState({title: '', description: ''})
   const [images, setImages] = useState([])
+  const [imagesURLs, setImagesURLs] = useState([])
   
   const rootClasses = [cl.modal]
 
@@ -40,6 +41,8 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
     setImages([])
    } else {
     setImages([...images, ...e.target.files])
+    let url = Array.from(e.target.files).map((image) => URL.createObjectURL(image)); 
+    setImagesURLs([...imagesURLs, ...url])
    }
   }
 
@@ -47,7 +50,8 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
     <Modal visible={visible} setVisible={setVisible} content={
       <div className={cl.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={cl.topic__form} >
-          <label style={{marginTop: '4%'}} htmlFor="title">Title</label>
+          {/* <label style={{marginTop: '4%'}} htmlFor="title">Title</label> */}
+          <p>New Topic</p>
           <input className={cl.title__input}
            id="title"
             type="text"
@@ -55,18 +59,15 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             onChange={(e) => setTopic({ ...topic, title: e.target.value })}
             placeholder="Topic Title"
           />
-          <label htmlFor="description">Description</label>
+          {/* <label htmlFor="description">Description</label> */}
           <textarea className={cl.description__input}
             id="description"
             value={topic.description}
             onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
           />
-                    <ImageInput checkAndSetImages={checkAndSetImages} imagesCount={ima}/>
-
-          <div>
-          <button onClick={createNewTopic} >Post</button>
-          </div>
+          <ImageInput checkAndSetImages={checkAndSetImages} images={imagesURLs}/>
+          <button className={'button'} onClick={createNewTopic} >Post</button>
         </div>
       </div>
     }/>

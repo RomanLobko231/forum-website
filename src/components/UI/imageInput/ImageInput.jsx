@@ -1,13 +1,21 @@
 import cl from './ImageInput.module.css'
 
-const ImageInput = ({checkAndSetImages, imagesCount}) => {
-  return (
-    <div className={cl.image__input}>
-      <input className={cl.image} id="image" type="file" multiple accept="image/*" onChange={checkAndSetImages}/>
-      <label htmlFor="image">Select images</label>
-        <p>{imagesCount}</p>
-    </div>
-  );
+const ImageInput = ({ checkAndSetImages, images }) => {
+
+    return (
+        <div className={cl.image__input}>
+            <input className={cl.image} id="image" type="file" multiple accept="image/*" onChange={checkAndSetImages} />
+            <label htmlFor="image">Select images</label>
+            {images !== undefined && 
+                <div className={cl.image__container}>
+                    {images.map( (image, index) =>
+                        <img src={image} key={index}/>
+                    )}
+                </div>
+            }
+
+        </div>
+    );
 };
 
 export default ImageInput;
