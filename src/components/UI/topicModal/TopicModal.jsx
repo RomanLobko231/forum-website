@@ -18,7 +18,11 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
 
   const createNewTopic = (e) => {
     e.preventDefault() 
-    const blob = new Blob([JSON.stringify(topic)], {
+
+    if(topic.title.trim() == ''){
+      alert("Title should not be empty")
+    } else{
+      const blob = new Blob([JSON.stringify(topic)], {
       type: 'application/json'
     })
     const data = new FormData();
@@ -31,18 +35,23 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
     setTopic({title: '', description: ''})
     setImages([])
     setVisible(false)
+    }
   }
 
 
   const checkAndSetImages = (e) => {
+    const totalImagesSize = images.reduce((acc, img) => acc + img.size, 0) +
+    Array.from(e.target.files).reduce((acc, img) => acc + img.size, 0);
+
     const totalImages = images.length + e.target.files.length
+
    if(totalImages > 3 ) {
-    alert("Max 3 images allowed, sorry")
-    setImages([])
+    alert("Max 3 images allowed")
+   } else if( totalImagesSize > 10000000){
+    alert("Total size of the images should be under 10MB")
    } else {
     setImages([...images, ...e.target.files])
-    let url = Array.from(e.target.files).map((image) => URL.createObjectURL(image)); 
-    setImagesURLs([...imagesURLs, ...url])
+    setImagesURLs([...imagesURLs, ...Array.from(e.target.files).map((image) => URL.createObjectURL(image))])
    }
   }
 
@@ -67,7 +76,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             placeholder="Topic Description"
           />
           <ImageInput checkAndSetImages={checkAndSetImages} images={imagesURLs}/>
-          <button className={'button'} onClick={createNewTopic} >Post</button>
+          <button className={'button'} onClick={createNewTopic}>Post</button>
         </div>
       </div>
     }/>

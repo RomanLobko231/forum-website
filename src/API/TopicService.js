@@ -42,6 +42,16 @@ export default class TopicService {
         return topic;
     }
 
+    static async getMessagesByTopicId(topidId){
+        const messages = await axios.get("http://localhost:8080/topics/" + topidId + "/messages")
+        .then((response) => {
+            return response;
+        }).catch((error) => {
+            console.log(error)
+        });
+        return messages;
+    }
+
     static async updateLikesDislikes({likes, dislikes, id}) {
         console.log(id)
         console.log(likes)

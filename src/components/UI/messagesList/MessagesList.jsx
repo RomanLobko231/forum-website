@@ -8,7 +8,6 @@ const MessagesList = ({messages}) => {
 
   return (
     <div className={cl.container}>
-    
       {messages.map(mess => 
                 <Message message={mess} key={mess.id}/>
             )}

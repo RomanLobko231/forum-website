@@ -12,9 +12,14 @@ const MessageModal = ({visible, setVisible, createMessage}) => {
   
     const createNewMessage= (e) => {
       e.preventDefault()
+      if(messageText.trim() == ''){
+        alert("Message should not be empty")
+      } else{
       createMessage(messageText)
       setMessage('')
       setVisible(false)
+      }
+    
     }
   
     return (
@@ -28,9 +33,8 @@ const MessageModal = ({visible, setVisible, createMessage}) => {
               onChange={(e) => setMessage(e.target.value)}
               placeholder="Message"
             />
-            <button className={cl.create__button} onClick={createNewMessage} >Post</button>
+            <button className={'button'} onClick={createNewMessage} >Post</button>
           </div>
-  
         </div>
       }/>
         

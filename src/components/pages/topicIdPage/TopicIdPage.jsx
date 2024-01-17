@@ -9,6 +9,8 @@ import cl from "./TopicIdPage.module.css"
 import TopicDescription from "../../UI/topicDescription/TopicDescription";
 import MessagesPageDetails from "../../UI/messagesPageDetails/MessagesPageDetails";
 import ImageModal from "../../UI/imageModal/ImageModal";
+import TopicDescriptionLoader from "../../UI/loader/TopicDescriptionLoader";
+import MessageLoader from "../../UI/loader/MessageLoader";
 
 const TopicIdPage = () => {
 
@@ -18,16 +20,21 @@ const TopicIdPage = () => {
     const [messageModal, setMessageModal] = useState(false)
     const [imageModal, setImageModal] = useState(false)
     const [imageSrc, setImageSrc] = useState("")
-    const [fetchMessages, isLoading, error] = useFetching(async () => {
+    const [fetchTopic, isLoading, error] = useFetching(async () => {
         const topic = await TopicService.getTopicById(params.id);
         setTopic(topic.data)
         setMessages(topic.data.messages)
-        error != null ? console.log(error) : console.log(topic)
+        // error != null ? console.log(error) : console.log(topic.data)
+    })
+
+    const[fetchMessages, isMessagesLoading, msgError] = useFetching( async () => {
+        const newMessages = await TopicService.getMessagesByTopicId(params.id);
+        setMessages(newMessages.data)
     })
     
 
     useEffect(() => {
-        fetchMessages()
+        fetchTopic()
     }, [])
 
     const createMessage = async (message) => {
@@ -38,7 +45,6 @@ const TopicIdPage = () => {
     const setImage = (src) => {
         setImageModal(!imageModal)
         setImageSrc(src) 
-        console.log(src)
     }
     
 
@@ -49,17 +55,12 @@ const TopicIdPage = () => {
             <MessageModal visible={messageModal} setVisible={setMessageModal} createMessage={createMessage}/>
             <ImageModal visible={imageModal} setVisible={setImageModal} image={imageSrc}/>
             {isLoading 
-            ? <TailSpin
-            visible={true}
-            height="80"
-            width="80"
-            color="#4fa94d"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-            />
-            : <MessagesPageDetails messages={messages} topic={topic} setMessageModal={setMessageModal} setImage={setImage}/>
+            ? <TopicDescriptionLoader/>
+            : <TopicDescription topic={topic} setImage={setImage}/>
+            }
+            {isMessagesLoading || isLoading
+            ?  <MessageLoader/> 
+            :  <MessagesPageDetails messages={messages} topic={topic} setMessageModal={setMessageModal} setImage={setImage}/>
             }
         </div>
     );

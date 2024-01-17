@@ -20,7 +20,7 @@ const TopicsHeader = ({filter, setFilter, setVisible}) => {
         onChange={e => setFilter({...filter, query: e.target.value})}
         placeholder="Search"
         />
-        <button className={cl.create__button} onClick={() => setVisible(true)}>Create new</button>
+        <button className={'button'} onClick={() => setVisible(true)}>Create new</button>
       </div>
     </div>
   );
