@@ -12,7 +12,7 @@ const MessageModal = ({visible, setVisible, createMessage}) => {
   
     const createNewMessage= (e) => {
       e.preventDefault()
-      if(messageText.trim() == ''){
+      if(messageText.trim() === ''){
         alert("Message should not be empty")
       } else{
       createMessage(messageText)

@@ -1,13 +1,15 @@
 import axios from "axios";
+const rootURL = "https://vatra.up.railway.app"
 
 export default class TopicService {
+
     static async getAll() {
-        const response = await axios.get('http://localhost:8080/topics')
+        const response = await axios.get(rootURL + '/topics')
         return response;
     }
 
     static async createNewTopic(data) {
-        const response = await axios.post('http://localhost:8080/topics', data, {
+        const response = await axios.post(rootURL + '/topics', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -22,7 +24,7 @@ export default class TopicService {
     }
 
     static async createNewMessage(message, topicId) {
-        await axios.post('http://localhost:8080/topics/' + topicId + '/messages', { message: message })
+        await axios.post(rootURL + '/topics/' + topicId + '/messages', { message: message })
             .then(function (response) {
                 console.log(response);
             })
@@ -32,7 +34,7 @@ export default class TopicService {
     }
 
     static async getTopicById(id) {
-        const topic = await axios.get('http://localhost:8080/topics/' + id)
+        const topic = await axios.get(rootURL + '/topics/' + id)
             .then((response) => {
                 return response;
             })
@@ -43,7 +45,7 @@ export default class TopicService {
     }
 
     static async getMessagesByTopicId(topidId){
-        const messages = await axios.get("http://localhost:8080/topics/" + topidId + "/messages")
+        const messages = await axios.get(rootURL + "/topics/" + topidId + "/messages")
         .then((response) => {
             return response;
         }).catch((error) => {
@@ -53,10 +55,7 @@ export default class TopicService {
     }
 
     static async updateLikesDislikes({likes, dislikes, id}) {
-        console.log(id)
-        console.log(likes)
-        console.log(dislikes)
-        await axios.put('http://localhost:8080/topics/likes-dislikes', {likes: likes, dislikes: dislikes, id: id})
+        await axios.put(rootURL + '/topics/likes-dislikes', {likes: likes, dislikes: dislikes, id: id})
             .then((response) => {
                 console.log(response)
             })

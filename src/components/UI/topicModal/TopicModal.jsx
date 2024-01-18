@@ -19,7 +19,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
   const createNewTopic = (e) => {
     e.preventDefault() 
 
-    if(topic.title.trim() == ''){
+    if(topic.title.trim() === ''){
       alert("Title should not be empty")
     } else{
       const blob = new Blob([JSON.stringify(topic)], {

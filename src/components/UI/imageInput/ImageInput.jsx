@@ -9,7 +9,7 @@ const ImageInput = ({ checkAndSetImages, images }) => {
             {images !== undefined && 
                 <div className={cl.image__container}>
                     {images.map( (image, index) =>
-                        <img src={image} key={index}/>
+                        <img src={image} key={index} alt="Your input files"/>
                     )}
                 </div>
             }

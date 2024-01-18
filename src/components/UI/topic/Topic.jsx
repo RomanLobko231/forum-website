@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import cl from "./Topic.module.css"
 import TopicBottomPanel from "../topicBottomPanel/TopicBottomPanel";
-import { useState } from "react";
 const Topic = ({ topic }) => {
 
   const navigate = useNavigate()
@@ -16,7 +15,7 @@ const Topic = ({ topic }) => {
     <div className={cl.topic__card}>
       <div className={cl.container} onClick={navigateToTopic}>
         <div className={cl.image_container}>
-          <img className={cl.image} src = {data == null ? "./vatra_logo.png" : `data:image/jpeg;base64,${data}`} />
+          <img className={cl.image} src = {data == null ? "./vatra_logo.png" : `data:image/jpeg;base64,${data}`} alt="Topic Thumbnail"/>
         </div>
         <div className={cl.text_container}>
           <h4 className={cl.title}>{topic.title}</h4>

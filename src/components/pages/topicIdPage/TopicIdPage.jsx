@@ -1,9 +1,7 @@
-import { useFetcher, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import TopicService from "../../../API/TopicService";
 import { useEffect, useState } from "react";
 import { useFetching } from "../../../hooks/useFetching";
-import MessagesList from "../../UI/messagesList/MessagesList";
-import { Hourglass, TailSpin } from "react-loader-spinner";
 import MessageModal from "../../UI/messageModal/MessageModal";
 import cl from "./TopicIdPage.module.css"
 import TopicDescription from "../../UI/topicDescription/TopicDescription";
@@ -24,12 +22,13 @@ const TopicIdPage = () => {
         const topic = await TopicService.getTopicById(params.id);
         setTopic(topic.data)
         setMessages(topic.data.messages)
-        // error != null ? console.log(error) : console.log(topic.data)
+        error !== '' ? console.log(error) : console.log(topic.data)
     })
 
     const[fetchMessages, isMessagesLoading, msgError] = useFetching( async () => {
         const newMessages = await TopicService.getMessagesByTopicId(params.id);
         setMessages(newMessages.data)
+        msgError !== '' ? console.log(msgError) : console.log(newMessages.data)
     })
     
 

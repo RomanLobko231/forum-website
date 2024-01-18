@@ -1,8 +1,7 @@
 import { BiLike, BiDislike, BiSolidLike, BiSolidDislike, BiCommentDetail } from "react-icons/bi";
 import cl from "./TopicBottomPanel.module.css"
 import TopicService from "../../../API/TopicService";
-import { useCallback, useContext, useState } from "react";
-import { LikeDislikeContext } from "../../../context";
+import { useState } from "react";
 
 const TopicBottomPanel = ({ topic }) => {
 

@@ -7,7 +7,6 @@ import TopicsList from "../../UI/topicsList/TopicsList";
 import { useFetching } from "../../../hooks/useFetching";
 import { TailSpin } from "react-loader-spinner";
 import { useSorting } from "../../../hooks/useSorting";
-import { LikeDislikeContext } from "../../../context";
 import { useNavigate } from "react-router-dom";
 
 const TopicsPage = () => {
@@ -19,7 +18,7 @@ const TopicsPage = () => {
   const [fetchTopics, isLoading, error] = useFetching(async () => {
     const response = await TopicService.getAll();
     setTopics(response.data)
-    console.log(response.data)
+    error !== '' ? console.log(error) : console.log(response.data)
   })
   const sortedTopics = useSorting(topics, filter.sort, filter.query)
 

@@ -12,7 +12,7 @@ const TopicDescription = ({topic, setImage}) => {
     )
   }
   
-  const data = topic.images === undefined || topic.images.length == 0 ? null : topic.images
+  const data = topic.images === undefined || topic.images.length === 0 ? null : topic.images
   
   return (
     <div className={cl.container}>

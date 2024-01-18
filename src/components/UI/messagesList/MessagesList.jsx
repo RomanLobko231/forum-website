@@ -1,5 +1,3 @@
-import { useState } from "react";
-import MessageModal from "../messageModal/MessageModal";
 import cl from "./MessagesList.module.css"
 import Message from "../message/Message";
 
