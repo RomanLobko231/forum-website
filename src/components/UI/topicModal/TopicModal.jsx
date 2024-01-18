@@ -21,10 +21,8 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
 
     if(topic.title.trim() === ''){
       alert("Title should not be empty")
-    } else if (topic.description.length() > 500){
-      alert("Description should be less then 500 characters")
-    } else if (topic.title.length() > 200){
-      alert("Description should be less then 200 characters")
+    } else if (topic.title.length > 200){
+      alert("Title should be less then 200 characters")
     }else{
       const blob = new Blob([JSON.stringify(topic)], {
       type: 'application/json'
