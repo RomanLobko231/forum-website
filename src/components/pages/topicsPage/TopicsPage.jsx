@@ -20,7 +20,7 @@ const TopicsPage = () => {
     setTopics(response.data)
     error !== '' ? console.log(error) : console.log(response.data)
   })
-  const sortedTopics = useSorting(topics, filter.sort, filter.query)
+  const sortedTopics = useSorting(topics, filter.sort, filter.query.toLowerCase())
 
   const navigate = useNavigate()
 
