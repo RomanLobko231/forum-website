@@ -32,10 +32,10 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
       data.append(`images`, image);
     });
     data.append('topic', blob);
-    createTopic(data)
 
     setTopic({title: '', description: ''})
     setImages([])
+    createTopic(data)
     setVisible(false)
     }
   }
