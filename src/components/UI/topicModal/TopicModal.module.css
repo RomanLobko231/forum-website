@@ -58,4 +58,12 @@
         display: flex;
         justify-content: center;
     }
+
+    .title__input{
+        font-size: 14px;
+    }
+
+    .description__input{
+        font-size: 12px;
+    }
 }
