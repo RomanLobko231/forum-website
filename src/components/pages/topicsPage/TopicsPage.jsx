@@ -8,13 +8,15 @@ import { useFetching } from "../../../hooks/useFetching";
 import { TailSpin } from "react-loader-spinner";
 import { useSorting } from "../../../hooks/useSorting";
 import { useNavigate } from "react-router-dom";
+import useWindowWidth from "../../../hooks/useWindowWidth";
+import MobileTopicHeader from "../../UI/topicsHeader/MobileTopicHeader";
 
 const TopicsPage = () => {
 
   const [modalVisible, setModalVisible] = useState(false)
   const [topics, setTopics] = useState([])
   const [filter, setFilter] = useState({ sort: '', query: '' })
-
+  const { width } = useWindowWidth();
   const [fetchTopics, isLoading, error] = useFetching(async () => {
     const response = await TopicService.getAll();
     setTopics(response.data)
@@ -28,9 +30,9 @@ const TopicsPage = () => {
     navigate("/topics/" + id)
   }
 
-
   useEffect(() => {
     fetchTopics()
+    console.log(width)
   }, [])
 
   const createTopic = async (topic) => {
@@ -39,13 +41,19 @@ const TopicsPage = () => {
     navigateToTopic(id)
   }
 
+
+
   return (
-    
-      <div className={cl.upper__container}>
-        <TopicModal visible={modalVisible} setVisible={setModalVisible} createTopic={createTopic} />
-        <TopicsHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible} />
-        {isLoading
-          ? <TailSpin
+
+    <div className={cl.upper__container}>
+      <TopicModal visible={modalVisible} setVisible={setModalVisible} createTopic={createTopic} />
+      {width > 768
+        ? <TopicsHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible} />
+        : <MobileTopicHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible}/>
+      }
+      
+      {isLoading
+        ? <TailSpin
           visible={true}
           height="80"
           width="80"
@@ -54,11 +62,11 @@ const TopicsPage = () => {
           radius="1"
           wrapperStyle={{}}
           wrapperClass=""
-          />
-          : <TopicsList topics={sortedTopics} />
-        }
-      </div>
-   
+        />
+        : <TopicsList topics={sortedTopics} />
+      }
+    </div>
+
   );
 };
 

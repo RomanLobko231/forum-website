@@ -11,4 +11,5 @@
 .description{
     word-break: break-all;
     max-width: 80%;
+    white-space: pre-wrap
 }
