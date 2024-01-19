@@ -47,6 +47,7 @@ const TopicsPage = () => {
 
     <div className={cl.upper__container}>
       <TopicModal visible={modalVisible} setVisible={setModalVisible} createTopic={createTopic} />
+      {width < 768 && <p style={{textAlign: 'center'}}>Mobile version is in development, sorry for possible inconveniences</p>}
       {width > 768
         ? <TopicsHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible} />
         : <MobileTopicHeader filter={filter} setFilter={setFilter} setVisible={setModalVisible}/>
