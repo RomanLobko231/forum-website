@@ -22,16 +22,36 @@
 .image__input{
     width: 90%;
     max-height: 250px;
+    margin-bottom: 2%;
 }
+
 
 .image__container{
     margin-top: 4%;
     display: flex;
     flex-direction: row;
     gap: 2%;
-    justify-content: center;
     align-items: center;
     max-height: 150px;
+    overflow: auto;
+}
+
+.gradient{
+    width: 100%;
+    max-height: 250px;
+    position: relative;
+}
+
+.gradient::before{
+    content: "";
+    pointer-events: none;
+    top: 0;
+    left: 0;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: -webkit-linear-gradient(left, rgba(235, 247, 252, 1)  0%, rgba(255, 255, 255, 0) 8%, rgba(255, 255, 255, 0) 92%, rgba(235, 247, 252, 1)  100%);
+ 
 }
 
 .image__container img {
