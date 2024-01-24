@@ -52,6 +52,9 @@
 .image{
     border-radius: 12px;
     object-fit: contain; 
+    width: auto;
+    height: auto;
+    max-width: 100%;
 }
 
 .text_container{
