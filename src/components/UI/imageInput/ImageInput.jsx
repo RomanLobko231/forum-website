@@ -1,6 +1,7 @@
+import ImageItem from '../imageItem/ImageItem';
 import cl from './ImageInput.module.css'
 
-const ImageInput = ({ checkAndSetImages, images }) => {
+const ImageInput = ({ checkAndSetImages, images, removeImage}) => {
 
     return (
         <div className={cl.image__input}>
@@ -10,7 +11,7 @@ const ImageInput = ({ checkAndSetImages, images }) => {
             <div className={cl.gradient}>
                <div className={cl.image__container}>
                     {images.map( (image, index) =>
-                        <img src={image} key={index} alt="Your input files"/>
+                        <ImageItem image={image} removeImage={() => removeImage(index)}/>
                     )}
                 </div> 
             </div>

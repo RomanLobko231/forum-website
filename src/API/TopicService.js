@@ -1,5 +1,5 @@
 import axios from "axios";
-const rootURL = "https://vatra.up.railway.app"
+const rootURL = "http://localhost:8080"
 
 export default class TopicService {
 
@@ -55,7 +55,7 @@ export default class TopicService {
     }
 
     static async updateLikesDislikes({likes, dislikes, id}) {
-        await axios.put(rootURL + '/topics/likes-dislikes', {likes: likes, dislikes: dislikes, id: id})
+        await axios.patch(rootURL + '/topics', {likes: likes, dislikes: dislikes, id: id})
             .then((response) => {
                 console.log(response)
             })

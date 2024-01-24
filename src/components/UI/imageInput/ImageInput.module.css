@@ -34,11 +34,13 @@
     align-items: center;
     max-height: 150px;
     overflow: auto;
+    justify-content: center;
 }
 
 .gradient{
     max-height: 250px;
     position: relative;
+    z-index: 100;
 }
 
 .gradient::before{
@@ -53,7 +55,7 @@
  
 }
 
-.image__container img {
+/* .image__container img {
     width: auto;
     height : auto;
     max-height: 100px; 
@@ -61,4 +63,4 @@
     border-radius: 8px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     margin-bottom: 4%;
-}
+} */

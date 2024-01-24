@@ -40,6 +40,13 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
     }
   }
 
+  const removeImage = (index) => {
+    const newImages = images.filter((_, i) => i !== index)
+    const newImagesURLs = imagesURLs.filter((_, i) => i !== index)
+
+    setImages(newImages);
+    setImagesURLs(newImagesURLs);
+  }
 
   const checkAndSetImages = (e) => {
     const totalImagesSize = images.reduce((acc, img) => acc + img.size, 0) +
@@ -77,7 +84,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
           />
-          <ImageInput checkAndSetImages={checkAndSetImages} images={imagesURLs}/>
+          <ImageInput checkAndSetImages={checkAndSetImages} images={imagesURLs} removeImage={removeImage}/>
           <button className={'button'} onClick={createNewTopic}>Post</button>
         </div>
       </div>
