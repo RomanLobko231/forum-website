@@ -1,5 +1,5 @@
 import axios from "axios";
-const rootURL = "http://localhost:8080"
+const rootURL = "https://vatra.up.railway.app"
 
 export default class TopicService {
 
