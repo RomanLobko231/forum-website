@@ -11,7 +11,8 @@ const ImageInput = ({ checkAndSetImages, images, removeImage}) => {
             <div className={cl.gradient}>
                <div className={cl.image__container}>
                     {images.map( (image, index) =>
-                        <ImageItem image={image} removeImage={() => removeImage(index)}/>
+                        <img src={image} key={index} alt="Your input files" onClick={() => removeImage(index)}/>
+                        // <ImageItem image={image} removeImage={() => removeImage(index)}/>
                     )}
                 </div> 
             </div>

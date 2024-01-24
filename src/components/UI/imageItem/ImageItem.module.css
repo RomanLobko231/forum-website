@@ -23,11 +23,10 @@
   max-height: 100px;
   opacity: 0;
   transition: .3s ease;
-  background-color: rgb(107, 79, 79);
 }
 
 .container:hover .caption {
-    opacity: 0.5;
+    opacity: 0.8;
   }
 
 .caption {
