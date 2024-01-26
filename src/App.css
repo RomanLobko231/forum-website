@@ -5,6 +5,13 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+#root{
+  width: 100%;
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+
 
 .button {
     border: 1px solid #4285f4;
