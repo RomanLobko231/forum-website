@@ -10,7 +10,7 @@
 }
 
 .modal.active {
-    z-index: 10;
+    z-index: 60;
     display: flex;
     justify-content: center;
     align-items: center;
