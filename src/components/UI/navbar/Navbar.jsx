@@ -20,13 +20,13 @@ const Navbar = () => {
                     <FaBars className={cl.icon} onClick={handleShowNavbar}/>
                 </div>
                 <div className= {visible ? cl.nav__menu__active : cl.nav__menu}> 
-                    <Link to="/topics" >
+                    <Link to="/topics" onClick={handleShowNavbar}>
                         Topics
                     </Link>
-                    <Link to="/main" >
+                    <Link to="/main" onClick={handleShowNavbar}>
                         Main
                     </Link>
-                    <Link to="/sign-up" >
+                    <Link to="/sign-up" onClick={handleShowNavbar}>
                         My Account
                     </Link>
                 </div>
