@@ -1,6 +1,7 @@
 import axios from "axios";
-const rootURL = "https://vatra.up.railway.app"
+// const rootURL = "https://vatra.up.railway.app" 
 
+const rootURL = "http://localhost:8080" // for local testing
 export default class TopicService {
 
     static async getAll() {
@@ -38,9 +39,6 @@ export default class TopicService {
             .then((response) => {
                 return response;
             })
-            .catch((error) => {
-                console.log(error)
-            });
         return topic;
     }
 

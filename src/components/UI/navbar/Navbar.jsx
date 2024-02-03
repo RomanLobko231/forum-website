@@ -11,9 +11,6 @@ const Navbar = () => {
     const handleShowNavbar = () => {
         if(window.innerWidth < 768) setVisible(!visible)
     }
-
-    console.log(visible)
-
     return (
         <div className={visible ? cl.container__active : cl.container}>
             <nav className={visible ? cl.nav__active : cl.nav}>

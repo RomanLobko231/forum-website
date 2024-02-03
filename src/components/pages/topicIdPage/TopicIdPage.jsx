@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import TopicService from "../../../API/TopicService";
 import { useEffect, useState } from "react";
 import { useFetching } from "../../../hooks/useFetching";
@@ -9,6 +9,7 @@ import MessagesPageDetails from "../../UI/messagesPageDetails/MessagesPageDetail
 import ImageModal from "../../UI/imageModal/ImageModal";
 import TopicDescriptionLoader from "../../UI/loader/TopicDescriptionLoader";
 import MessageLoader from "../../UI/loader/MessageLoader";
+import ErrorComponent from "../../UI/errorComponent/ErrorComponent";
 
 const TopicIdPage = () => {
 
@@ -22,13 +23,14 @@ const TopicIdPage = () => {
         const topic = await TopicService.getTopicById(params.id);
         setTopic(topic.data)
         setMessages(topic.data.messages)
-        error !== '' ? console.log(error) : console.log(topic.data)
     })
+
+    const navigate = useNavigate()
 
     const[fetchMessages, isMessagesLoading, msgError] = useFetching( async () => {
         const newMessages = await TopicService.getMessagesByTopicId(params.id);
         setMessages(newMessages.data)
-        msgError !== '' ? console.log(msgError) : console.log(newMessages.data)
+        msgError !== '' ? console.log("loh") : console.log("neloh")
     })
     
 
@@ -46,7 +48,12 @@ const TopicIdPage = () => {
         setImageSrc(src) 
     }
     
-
+    if(error) {
+        console.log(error)
+        return(
+            <ErrorComponent error={error}/>
+        )
+    }
     
 
     return (
