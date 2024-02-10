@@ -1,17 +1,6 @@
-.modal{
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    left: 0;
-    display: none;
-    background: rgba(0, 0, 0, 0.4);
-    backdrop-filter: blur(4px);
-}
-
 .modalContent {
     padding: 15px;
-    background: rgb(241, 249, 252);
+    background: rgb(242, 245, 250);
     border-radius: 24px;
     width: 500px;
     height: 400px;
@@ -32,7 +21,7 @@
 }
 
 .description__input{
-    background: rgb(235, 247, 252);
+    background: rgb(250, 254, 254);
     border-radius: 8px;
     padding: 4px;
     min-width: 90%;

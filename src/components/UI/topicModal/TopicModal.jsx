@@ -9,12 +9,6 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
   const [images, setImages] = useState([])
   const [imagesURLs, setImagesURLs] = useState([])
   
-  const rootClasses = [cl.modal]
-
-  if (visible) {
-    rootClasses.push(cl.active);
-  }
-  
 
   const createNewTopic = (e) => {
     e.preventDefault() 
@@ -65,7 +59,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
   }
 
   return (
-    <Modal visible={visible} setVisible={setVisible} content={
+    <Modal visible={visible} setVisible={setVisible}>
       <div className={cl.modalContent} onClick={(e) => e.stopPropagation()}>
         <div className={cl.topic__form} >
           {/* <label style={{marginTop: '4%'}} htmlFor="title">Title</label> */}
@@ -88,7 +82,7 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
           <button className={'button'} onClick={createNewTopic}>Post</button>
         </div>
       </div>
-    }/>
+    </Modal>
   );
 };
 

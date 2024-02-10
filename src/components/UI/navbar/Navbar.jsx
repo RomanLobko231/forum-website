@@ -3,10 +3,13 @@ import { FaBars } from "react-icons/fa";
 import { GiCampfire } from "react-icons/gi";
 import cl from "./Navbar.module.css"
 import { useState } from "react";
+import { useModal } from "../../../context/ModalProvider";
 
 const Navbar = () => {
 
     const [visible, setVisible] = useState(false)
+
+    const { isModalOpen, toggleModal } = useModal();
 
     const handleShowNavbar = () => {
         if(window.innerWidth < 768) setVisible(!visible)
@@ -25,9 +28,7 @@ const Navbar = () => {
                     <Link to="/main" onClick={handleShowNavbar}>
                         Main
                     </Link>
-                    <Link to="/sign-up" onClick={handleShowNavbar}>
-                        My Account
-                    </Link>
+                    <button className={cl.button} onClick={toggleModal}>Log In</button>
                 </div>
             </nav>
         </div>

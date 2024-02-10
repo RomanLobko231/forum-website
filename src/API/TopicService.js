@@ -1,16 +1,14 @@
-import axios from "axios";
-// const rootURL = "https://vatra.up.railway.app" 
+import api from './api';
 
-const rootURL = "http://localhost:8080" // for local testing
 export default class TopicService {
 
     static async getAll() {
-        const response = await axios.get(rootURL + '/topics')
+        const response = await api.get('/topics')
         return response;
     }
 
     static async createNewTopic(data) {
-        const response = await axios.post(rootURL + '/topics', data, {
+        const response = await api.post('/topics', data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
             }
@@ -25,7 +23,7 @@ export default class TopicService {
     }
 
     static async createNewMessage(message, topicId) {
-        await axios.post(rootURL + '/topics/' + topicId + '/messages', { message: message })
+        await api.post('/topics/' + topicId + '/messages', { message: message })
             .then(function (response) {
                 console.log(response);
             })
@@ -35,7 +33,7 @@ export default class TopicService {
     }
 
     static async getTopicById(id) {
-        const topic = await axios.get(rootURL + '/topics/' + id)
+        const topic = await api.get('/topics/' + id)
             .then((response) => {
                 return response;
             })
@@ -43,7 +41,7 @@ export default class TopicService {
     }
 
     static async getMessagesByTopicId(topidId){
-        const messages = await axios.get(rootURL + "/topics/" + topidId + "/messages")
+        const messages = await api.get("/topics/" + topidId + "/messages")
         .then((response) => {
             return response;
         }).catch((error) => {
@@ -53,7 +51,7 @@ export default class TopicService {
     }
 
     static async updateLikesDislikes({likes, dislikes, id}) {
-        await axios.patch(rootURL + '/topics', {likes: likes, dislikes: dislikes, id: id})
+        await api.patch('/topics', {likes: likes, dislikes: dislikes, id: id})
             .then((response) => {
                 console.log(response)
             })

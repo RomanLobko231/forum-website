@@ -1,5 +1,5 @@
 import cl from './Modal.module.css'
-const Modal = ({visible, setVisible, content}) => {
+const Modal = ({visible, setVisible, children}) => {
     const rootClasses = [cl.modal]
     if (visible) {
         rootClasses.push(cl.active);
@@ -7,7 +7,7 @@ const Modal = ({visible, setVisible, content}) => {
       
   return (
     <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
-        {content}
+        {children}
     </div>
   );
 };

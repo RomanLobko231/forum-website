@@ -5,6 +5,11 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
+button, input, textarea, select {
+  font-family: inherit;
+}
+
+
 #root{
   width: 100%;
   flex-direction: column;

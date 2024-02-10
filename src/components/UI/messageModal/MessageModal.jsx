@@ -4,12 +4,7 @@ import Modal from "../modal/Modal";
 
 const MessageModal = ({visible, setVisible, createMessage}) => {
     const [messageText, setMessage] = useState('')
-    const rootClasses = [cl.modal]
-  
-    if (visible) {
-      rootClasses.push(cl.active);
-    }
-  
+    
     const createNewMessage= (e) => {
       e.preventDefault()
       if(messageText.trim() === ''){
@@ -23,7 +18,7 @@ const MessageModal = ({visible, setVisible, createMessage}) => {
     }
   
     return (
-      <Modal visible={visible} setVisible={setVisible} content={
+      <Modal visible={visible} setVisible={setVisible}>
         <div className={cl.modalContent} onClick={(e) => e.stopPropagation()}>
           <div className={cl.topic__form} >
             <label htmlFor="message">Your message</label>
@@ -36,7 +31,7 @@ const MessageModal = ({visible, setVisible, createMessage}) => {
             <button className={'button'} onClick={createNewMessage} >Post</button>
           </div>
         </div>
-      }/>
+      </Modal>
         
     );
 };
