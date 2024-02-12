@@ -1,58 +1,100 @@
 import { useState } from 'react';
 import cl from './LoginRegisterModal.module.css'
+import { useForm } from 'react-hook-form';
+import TextInput from '../inputField/TextInput';
+import InputError from '../inputError/InputError';
 
-const RegisterContent = ({registerUser}) => {
-    const [userInfo, setUserInfo] = useState({ username: '', password: '', checkPassword: '', email: '' })
+const RegisterContent = ({ registerUser }) => {
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors }
+    } = useForm();
+    const password = watch("password");
 
-    const checkAndRegisterUser = (e) => {
-        e.preventDefault();
-        if(userInfo.username.length < 3 || userInfo.username.length > 20) {
-            alert("Username should be between 3 and 20 characters")
-        } else if (userInfo.password.length < 8 || userInfo.password.length > 40){
-            alert("Password should be between 6 and 40 characters")
-        } else if (userInfo.password !== userInfo.checkPassword){
-            alert("Passwords do not match!")
-        } else {
-            registerUser(userInfo);
-            setUserInfo({ username: '', password: '', checkPassword: '', email: '' })
-        }
-    }
-
-  return (
-    <div className={cl.container}>
-        <form className={cl.container} onSubmit={checkAndRegisterUser}>
-        <input className={cl.input}
-                    type="text"
-                    value={userInfo.username}
-                    onChange={(e) => setUserInfo({ ...userInfo, username: e.target.value })}
-                    placeholder="Username"
+    const onSubmit = (userInfo) => {
+        //registerUser(userInfo);
+    };
+    return (
+        <div className={cl.container}>
+            <form className={cl.container} onSubmit={handleSubmit(onSubmit)}>
+                <TextInput
+                    type='text'
+                    autocomplete='name'
+                    placeholder='Username'
+                    registerName='username'
+                    register={register}
+                    errors={errors}
+                    constraints={{
+                        required: "This field is required",
+                        minLength: {
+                            value: 3,
+                            message: "Username must have more than 3 characters"
+                        },
+                        maxLength: {
+                            value: 20,
+                            message: "Username must not exceed 20 characters"
+                        }
+                    }
+                    }
                 />
-                <input className={cl.input}
-                    type="text"
-                    value={userInfo.email}
-                    onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
-                    placeholder="Email"
+                <TextInput
+                type='text'
+                autocomplete='email'
+                placeholder='Email'
+                registerName='email'
+                register={register}
+                errors={errors}
+                constraints={{
+                    required: "This field is required"
+                }
+                }
                 />
+                <div className={cl.passwords__container}>
                 <input className={cl.password1}
                     type="password"
-                    value={userInfo.password}
-                    onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
                     placeholder="Password"
                     autoComplete="off"
+                    {...register("password", {
+                        required: "Password field is required",
+                        minLength: {
+                            value: 8,
+                            message: "Password must have more than 8 characters"
+                        },
+                        maxLength: {
+                            value: 40,
+                            message: "Password must not exceed 40 characters"
+                        }
+                    })}
 
                 />
                 <input className={cl.password2}
                     type="password"
-                    value={userInfo.checkPassword}
-                    onChange={(e) => setUserInfo({ ...userInfo, checkPassword: e.target.value })}
                     placeholder="Repeat password"
                     autoComplete="off"
+                    {...register("checkPassword", {
+                        required: "Repeat password field is required",
+                        validate: value =>
+                            value === password || "The passwords do not match"
+                    })}
+
                 />
+                {errors.password && <InputError errorMessage={errors?.password?.message}/>}
+                {errors.checkPassword && <InputError errorMessage={errors.checkPassword.message}/>}
+                </div>
+                <div className={cl.terms__conditions__container}>
+                <input
+                type='checkbox'
+                {...register("acceptConditions", { required: true })}
+                />
+                <p>I accept <a href='http://localhost:3000/terms-conditions' target="_blank" rel="noopener noreferrer">terms and conditions</a></p>
+                </div>
                 <button className='button' type='submit'>Sign Up</button>
-        </form>
-                
-            </div>
-  );
+            </form>
+
+        </div>
+    );
 };
 
 export default RegisterContent;

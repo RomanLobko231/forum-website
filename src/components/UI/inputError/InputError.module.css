@@ -1,0 +1,14 @@
+.error__container{
+    width: 100%;
+    justify-content: center;
+    margin: 0 0 3% 0;
+    display: flex;
+    flex-direction: row;
+    gap: 1%;
+    align-items: center;
+}
+
+.error__message{
+    margin: 0 0 0 0;
+    color: brown;
+}

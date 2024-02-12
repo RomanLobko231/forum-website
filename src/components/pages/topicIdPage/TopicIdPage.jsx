@@ -6,7 +6,7 @@ import MessageModal from "../../UI/messageModal/MessageModal";
 import cl from "./TopicIdPage.module.css"
 import TopicDescription from "../../UI/topicDescription/TopicDescription";
 import MessagesPageDetails from "../../UI/messagesPageDetails/MessagesPageDetails";
-import ImageModal from "../../UI/imageModal/ImageModal";
+import ImageModal from "../../UI/imagesComponents/imageModal/ImageModal";
 import TopicDescriptionLoader from "../../UI/loader/TopicDescriptionLoader";
 import MessageLoader from "../../UI/loader/MessageLoader";
 import ErrorComponent from "../../UI/errorComponent/ErrorComponent";

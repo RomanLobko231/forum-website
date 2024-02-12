@@ -1,38 +1,50 @@
 import { useState } from 'react';
 import cl from './LoginRegisterModal.module.css'
+import { useForm } from 'react-hook-form';
+import TextInput from '../inputField/TextInput';
 
-const LoginContent = ({loginUser}) => {
-    const [userInfo, setUserInfo] = useState({ username: '', password: ''})
-
-    const login = (e) => {
-        e.preventDefault();
-        if(userInfo.username.trim() === '' || userInfo.password.trim() === '') {
-            alert("Check that all fields are not empty")
-        } else {
-         loginUser(userInfo)
-        setUserInfo({ username: '', password: ''})   
-        }
+const LoginContent = ({ loginUser }) => {
+    const onSubmit = (userInfo) => {
+        // loginUser(userInfo)
     }
 
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors }
+    } = useForm();
+
     return (
-      <div className={cl.container}>
-        <form className={cl.container} onSubmit={login}>
-            <input className={cl.input}
-                      type="text"
-                      value={userInfo.username}
-                      onChange={(e) => setUserInfo({ ...userInfo, username: e.target.value })}
-                      placeholder="Username"
-                  />
-                  <input className={cl.input}
-                      type="password"
-                      value={userInfo.password}
-                      onChange={(e) => setUserInfo({ ...userInfo, password: e.target.value })}
-                      placeholder="Password"
-                      autoComplete='off'
-                  />
-                  <button className='button' type='submit'>Sign In</button>
-        </form>
-              </div>
+        <div className={cl.container}>
+            <form className={cl.container} onSubmit={handleSubmit(onSubmit)}>
+                <TextInput
+                    type='text'
+                    autocomplete='name'
+                    placeholder='Username'
+                    registerName='username'
+                    register={register}
+                    errors={errors}
+                    constraints={{
+                        required: "This field is required"
+                    }
+                    }
+                />
+                <TextInput
+                    type='password'
+                    autocomplete='current-password'
+                    placeholder='Password'
+                    registerName='password'
+                    register={register}
+                    errors={errors}
+                    constraints={{
+                        required: "This field is required"
+                    }
+                    }
+                />
+                <button className='button' type='submit'>Sign In</button>
+            </form>
+        </div>
     );
 };
 

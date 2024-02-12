@@ -1,4 +1,4 @@
-import Modal from "../modal/Modal";
+import Modal from "../../modal/Modal";
 import cl from './ImageModal.module.css'
 const ImageModal = ({visible, setVisible, image}) => {
   return (

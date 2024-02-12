@@ -1,4 +1,4 @@
-import ImagesList from '../imagesList/ImagesList';
+import ImagesList from '../imagesComponents/imagesList/ImagesList';
 import cl from './TopicDescription.module.css'
 
 

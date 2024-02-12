@@ -2,23 +2,19 @@
     padding: 15px;
     background: rgb(242, 245, 250);
     border-radius: 24px;
-    min-width: 500px;
+    min-width: 450px;
     max-width: 700px;
     max-height: 95%;
     display: flex;
     justify-content: center;
 }
 
-.input{
-    padding-left: 12px;
-    width: 90%;
-    height: 50px;
-    margin-bottom: 3%;
-    font-size: 18px;
-    border-radius: 16px;
-    background: rgb(250, 254, 254);
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
-    border: 0;
+
+.passwords__container{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
 }
 
 .password1{
@@ -45,16 +41,6 @@
     outline: none;
 }
 
-
-.input:active{
-outline: none;
-box-shadow: none;
-}
-
-.input:focus{
-    outline: none;
-box-shadow: none;
-}
 .container{
     display: flex;
     flex-direction: column;
@@ -62,6 +48,13 @@ box-shadow: none;
     width: 100%;
 }
 
+.terms__conditions__container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
 
 .buttons{
     display: flex;
