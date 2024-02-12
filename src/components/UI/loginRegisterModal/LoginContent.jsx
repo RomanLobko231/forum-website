@@ -2,10 +2,13 @@ import { useState } from 'react';
 import cl from './LoginRegisterModal.module.css'
 import { useForm } from 'react-hook-form';
 import TextInput from '../inputField/TextInput';
+import { useAuth } from '../../../hooks/useAuth';
 
 const LoginContent = ({ loginUser }) => {
+
+
     const onSubmit = (userInfo) => {
-        // loginUser(userInfo)
+       loginUser(userInfo)
     }
 
     const {

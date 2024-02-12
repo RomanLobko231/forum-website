@@ -32,7 +32,6 @@ const TopicsPage = () => {
 
   useEffect(() => {
     fetchTopics()
-    console.log(width)
   }, [])
 
   const createTopic = async (topic) => {

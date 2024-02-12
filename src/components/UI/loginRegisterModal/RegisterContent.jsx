@@ -3,6 +3,8 @@ import cl from './LoginRegisterModal.module.css'
 import { useForm } from 'react-hook-form';
 import TextInput from '../inputField/TextInput';
 import InputError from '../inputError/InputError';
+import api from './../../../API/api';
+
 
 const RegisterContent = ({ registerUser }) => {
     const {
@@ -14,7 +16,7 @@ const RegisterContent = ({ registerUser }) => {
     const password = watch("password");
 
     const onSubmit = (userInfo) => {
-        //registerUser(userInfo);
+       const user =  registerUser(userInfo);
     };
     return (
         <div className={cl.container}>
@@ -88,7 +90,7 @@ const RegisterContent = ({ registerUser }) => {
                 type='checkbox'
                 {...register("acceptConditions", { required: true })}
                 />
-                <p>I accept <a href='http://localhost:3000/terms-conditions' target="_blank" rel="noopener noreferrer">terms and conditions</a></p>
+                <p>I accept <a href={ window.location.origin + '/terms-conditions'} target="_blank" rel="noopener noreferrer">terms and conditions</a></p>
                 </div>
                 <button className='button' type='submit'>Sign Up</button>
             </form>

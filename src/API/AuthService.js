@@ -1,26 +1,30 @@
+import { useAuth } from '../hooks/useAuth';
+import React from 'react';
 import api from './api';
+
+
 
 export default class AuthService{
 
     static async registerUser(userInfo){
-        const response = await api.post("/auth/register", userInfo)
+        const user = await api.post("/auth/register", userInfo)
         .then((response) => {
-            return response;
+            return response.data;
         })
         .catch((error) => {
             console.log(error);
         });
-        return response;
+        return user;
     }
 
     static async loginUser(userInfo){
-        const response = await api.post("/auth/login", userInfo)
+        const user = await api.post("/auth/login", userInfo)
         .then((response) => {
-            return response;
+            return(response.data)
         })
         .catch((error) => {
             console.log(error);
         });
-        return response;
+        return user;
     }
 }

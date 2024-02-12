@@ -4,76 +4,32 @@ import Modal from "../modal/Modal";
 import ImageInput from "../imagesComponents/imageInput/ImageInput";
 import TextInput from "../inputField/TextInput";
 import { useForm } from "react-hook-form";
+import InputError from "../inputError/InputError";
 
 const TopicModal = ({ visible, setVisible, createTopic }) => {
 
-  const [topic, setTopic] = useState({ title: '', description: '' })
+  //const [topic, setTopic] = useState({ title: '', description: '' })
   const [images, setImages] = useState([])
-  const [error, setError] = useState('')
 
-  const onSubmit = () => {
-    //e.preventDefault() 
-    alert("booba")
-    // if(topic.title.trim() === ''){
-    //   alert("Title should not be empty")
-    // } else if (topic.title.length > 200){
-    //   alert("Title should be less then 200 characters")
-    // }else{
-    //   const blob = new Blob([JSON.stringify(topic)], {
-    //   type: 'application/json'
-    // })
-    // const data = new FormData();
-    // images.forEach(image => {
-    //   data.append(`images`, image);
-    // });
-    // data.append('topic', blob);
+  const onSubmit = (topic) => {
+    console.log(topic)
+    console.log(images)
 
-    // setTopic({title: '', description: ''})
-    // setImages([])
-    // createTopic(data)
-    // setVisible(false)
-    // }
-  }
+    const blob = new Blob([JSON.stringify(topic)], {
+      type: 'application/json'
+    })
+    const data = new FormData();
+    images.forEach(image => {
+      data.append(`images`, image);
+    });
+    data.append('topic', blob);
+    console.log(data)
 
-  // useEffect(() => {
-  //   const totalImagesSize = images.reduce((acc, img) => acc + img.size, 0) 
-  //   const totalImages = images.length 
+    //setTopic({ title: '', description: '' })
+    setImages([])
+    createTopic(data)
+    setVisible(false)
 
-  //   if (totalImages > 3) {
-  //     //alert("Max 3 images allowed")
-  //     setError("Max 3 images allowed")
-  //   } else if (totalImagesSize > 10 * 1024 * 1024) {
-  //     //alert("Total size of the images should be under 10MB")
-  //     setError("Total size of the images should be under 10MB")
-  //   } else {
-  //     setError('')
-  //   }
-  // }, [images]);
-  
-  const removeImage = (index) => {
-    const newImages = images.filter((_, i) => i !== index)
-    setImages(newImages);
-
-  }
-
-  const checkAndSetImages = (e) => {
-    const totalImagesSize = images.reduce((acc, img) => acc + img.size, 0) +
-      Array.from(e.target.files).reduce((acc, img) => acc + img.size, 0);
-
-    const totalImages = images.length + e.target.files.length
-
-    console.log(e.target.files)
-
-    if (totalImages > 3) {
-      alert("Max 3 images allowed")
-      //setError("Max 3 images allowed")
-    } else if (totalImagesSize > 10 * 1024 * 1024) {
-      alert("Total size of the images should be under 10MB")
-      //setError("Total size of the images should be under 10MB")
-    } else {
-      setImages([...images, ...e.target.files])
-      //setError("")
-    }
   }
 
   const {
@@ -97,16 +53,29 @@ const TopicModal = ({ visible, setVisible, createTopic }) => {
             register={register}
             errors={errors}
             constraints={{
-              required: "This field is required"
+              required: "This field is required",
+              maxLength: {
+                value: 200,
+                message: "Title must not exceed 200 characters"
+              }
             }
             }
           />
-          <textarea className={cl.description__input}
-            value={topic.description}
-            onChange={(e) => setTopic({ ...topic, description: e.target.value })}
+          <textarea 
+          className={cl.description__input}
+           // value={topic.description}
+            //onChange={(e) => setTopic({ ...topic, description: e.target.value })}
             placeholder="Topic Description"
+            type='textarea'
+            {...register("description", {
+              required: false,
+              maxLength: {
+                  value: 5000,
+                  message: "Description must not exceed 5000 characters"
+              }})}
           />
-          <ImageInput checkAndSetImages={checkAndSetImages} images={images} removeImage={removeImage} error={error}/>
+          {errors.description && <InputError errorMessage={errors.description.message}/>}
+          <ImageInput setImages={setImages} images={images} />
           <button className={'button'} type="submit" >Post</button>
         </form>
       </div>

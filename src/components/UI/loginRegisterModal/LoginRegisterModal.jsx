@@ -5,21 +5,28 @@ import LoginContent from "./LoginContent";
 import RegisterContent from "./RegisterContent";
 import { useModal } from "../../../context/ModalProvider";
 import AuthService from "../../../API/AuthService";
+import { useAuth } from "../../../hooks/useAuth";
 
 const LoginRegisterModal = () => {
 
     const { isModalOpen, toggleModal} = useModal();
     const [modalContentType, setModalContentType] = useState("login")
+    const {login} = useAuth();
+
 
     const registerUser = async (userInfo) => {
         const response = await AuthService.registerUser(userInfo)
         toggleModal();
         setModalContentType("login")
+        return response;
+
     }
 
     const loginUser = async (userInfo) => {
-        const response = await AuthService.loginUser(userInfo)
+        const user = await AuthService.loginUser(userInfo)
+        login(user)
         toggleModal();
+        return user;
     }
 
     return (
