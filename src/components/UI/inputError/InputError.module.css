@@ -1,5 +1,5 @@
 .error__container{
-    width: 100%;
+    width: 90%;
     justify-content: center;
     margin: 0 0 3% 0;
     display: flex;
@@ -9,6 +9,8 @@
 }
 
 .error__message{
+    text-align: center;
     margin: 0 0 0 0;
     color: brown;
+    font-size: small;
 }
