@@ -54,13 +54,14 @@ const TopicsPage = () => {
       
       {isLoading
         ? <TailSpin
+          
           visible={true}
-          height="80"
-          width="80"
-          color="#4fa94d"
+          height="50"
+          width="50"
+          color="#4285f4"
           ariaLabel="tail-spin-loading"
           radius="1"
-          wrapperStyle={{}}
+          wrapperStyle={{marginTop: '5%'}}
           wrapperClass=""
         />
         : <TopicsList topics={sortedTopics} />
