@@ -6,7 +6,7 @@
 }
 
 .query__input{
-  max-width: 100px;
+  max-width: 150px;
   height: 38px;
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(27, 35, 59, 0.10);
