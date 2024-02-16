@@ -25,8 +25,6 @@ const TopicIdPage = () => {
         setMessages(topic.data.messages)
     })
 
-    const navigate = useNavigate()
-
     const[fetchMessages, isMessagesLoading, msgError] = useFetching( async () => {
         const newMessages = await TopicService.getMessagesByTopicId(params.id);
         setMessages(newMessages.data)

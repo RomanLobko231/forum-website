@@ -51,6 +51,10 @@ button, input, textarea, select {
     will-change: transform,opacity;
     z-index: 0;
   }
+
+.button:disabled{
+  background: #4285f4;
+}
   
   .button:hover {
     background: #2c425f;

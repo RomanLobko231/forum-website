@@ -1,10 +1,6 @@
 import cl from './TextInput.module.css'
 import InputError from '../inputError/InputError';
 
-
-{
-
-}
 const TextInput = ({ type, autocomplete, placeholder, registerName, constraints, register, errors, inputStyle }) => {
 
 

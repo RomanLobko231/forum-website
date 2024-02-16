@@ -37,6 +37,7 @@ export default class TopicService {
             .then((response) => {
                 return response;
             })
+            
         return topic;
     }
 

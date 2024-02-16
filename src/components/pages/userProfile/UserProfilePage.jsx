@@ -2,7 +2,7 @@ import { useAuth } from "../../../hooks/useAuth";
 import cl from './UserProfilePage.module.css'
 
 const UserProfilePage = () => {
-    const { user, token, logout } = useAuth();
+    const { user, logout } = useAuth();
 
     if (!user) {
         return (

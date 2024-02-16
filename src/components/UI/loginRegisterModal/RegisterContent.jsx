@@ -4,9 +4,20 @@ import { useForm } from 'react-hook-form';
 import TextInput from '../inputField/TextInput';
 import InputError from '../inputError/InputError';
 import api from './../../../API/api';
+import { TailSpin } from 'react-loader-spinner';
+import AuthService from '../../../API/AuthService';
+import { useFetching } from '../../../hooks/useFetching';
 
 
-const RegisterContent = ({ registerUser }) => {
+const RegisterContent = ({ setModalContentType }) => {
+
+
+    const [registerUser, isLoading, error] = useFetching(async (userInfo) => {
+        await AuthService.registerUser(userInfo)
+        setModalContentType("confirm_email")
+    })
+
+
     const {
         register,
         handleSubmit,
@@ -16,11 +27,12 @@ const RegisterContent = ({ registerUser }) => {
     const password = watch("password");
 
     const onSubmit = (userInfo) => {
-       const user =  registerUser(userInfo);
+       const user = registerUser(userInfo);
     };
     return (
         <div className={cl.container}>
             <form className={cl.container} onSubmit={handleSubmit(onSubmit)}>
+                {error && <InputError errorMessage={error.message}/>}
                 <TextInput
                     type='text'
                     autocomplete='name'
@@ -92,7 +104,19 @@ const RegisterContent = ({ registerUser }) => {
                 />
                 <p>I accept <a href={ window.location.origin + '/terms-conditions'} target="_blank" rel="noopener noreferrer">terms and conditions</a></p>
                 </div>
-                <button className='button' type='submit'>Sign Up</button>
+                {isLoading
+                ? <TailSpin
+                visible={true}
+                height="50"
+                width="50"
+                color="#4285f4"
+                ariaLabel="tail-spin-loading"
+                radius="1"
+                wrapperStyle={{ marginTop: '5%' }}
+                wrapperClass=""
+            />
+                : <button className='button' disabled={isLoading} type='submit'>Sign Up</button>
+                }
             </form>
 
         </div>
