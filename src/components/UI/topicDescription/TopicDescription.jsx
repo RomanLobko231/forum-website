@@ -1,18 +1,18 @@
 import ImagesList from '../imagesComponents/imagesList/ImagesList';
+import TopicDescriptionLoader from '../loader/TopicDescriptionLoader';
 import cl from './TopicDescription.module.css'
 
 
-const TopicDescription = ({topic, setImage}) => {
+const TopicDescription = ({topic, setImage, isLoading}) => {
 
-  if(!topic) {
+  if(isLoading || !topic) {
     return(
-      <div>
-        <h1>Such topic does not exist</h1>
-      </div>
+      <TopicDescriptionLoader/>
     )
-  }
+  } 
   
   const data = topic.images === undefined || topic.images.length === 0 ? null : topic.images
+
   
   return (
     <div className={cl.container}>

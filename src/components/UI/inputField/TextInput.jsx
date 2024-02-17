@@ -1,14 +1,16 @@
 import cl from './TextInput.module.css'
 import InputError from '../inputError/InputError';
 
-const TextInput = ({ type, autocomplete, placeholder, registerName, constraints, register, errors, inputStyle }) => {
+const TextInput = ({ type, autocomplete, placeholder, disabled ,registerName, constraints, register, errors, inputStyle }) => {
 
 
     return (
         <div className={cl.input__container}>
-            <input className={inputStyle == null ? cl.input : inputStyle}
+            <input 
+                className={inputStyle == null ? cl.input : inputStyle}
                 autoComplete={autocomplete}
                 type={type}
+                disabled={disabled}
                 placeholder={placeholder}
                 {...register(registerName, constraints)}
             />

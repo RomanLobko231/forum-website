@@ -232,6 +232,16 @@
   }
   
 
+  .forgot__password{
+    cursor: pointer;
+    color: rgb(110, 110, 110);
+    font-size: small;
+  }
+
+  .forgot__password:hover{
+    color: rgb(75, 74, 74);
+  }
+
 @media (max-width: 1050px) {
     .modalContent {
         padding: 15px;

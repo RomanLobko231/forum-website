@@ -107,12 +107,12 @@ const RegisterContent = ({ setModalContentType }) => {
                 {isLoading
                 ? <TailSpin
                 visible={true}
-                height="50"
-                width="50"
+                height="48"
+                width="48"
                 color="#4285f4"
                 ariaLabel="tail-spin-loading"
                 radius="1"
-                wrapperStyle={{ marginTop: '5%' }}
+                wrapperStyle={{ }}
                 wrapperClass=""
             />
                 : <button className='button' disabled={isLoading} type='submit'>Sign Up</button>

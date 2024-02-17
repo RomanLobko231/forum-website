@@ -23,7 +23,20 @@ export default class AuthService{
     static async verifyUser(token){
         return await api.post("/auth/verify?token=" + token)
         .then((response) => {
-            console.log(response.data)
+            return(response)
+        })
+    }
+
+    static async sendResetEmail(email){
+        return await api.post("/auth/send-reset-email?email=" + email)
+        .then((response) =>{
+            return(response)
+        })
+    }
+
+    static async sendNewPassword(token, newPassword){
+        return await api.post("/auth/reset-password" + {token: token, newPassword: newPassword})
+        .then((response) => {
             return(response)
         })
     }

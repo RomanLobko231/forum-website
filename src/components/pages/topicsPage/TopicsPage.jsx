@@ -10,6 +10,7 @@ import { useSorting } from "../../../hooks/useSorting";
 import { useNavigate } from "react-router-dom";
 import useWindowWidth from "../../../hooks/useWindowWidth";
 import MobileTopicHeader from "../../UI/topicsHeader/MobileTopicHeader";
+import ErrorComponent from "../../UI/errorComponent/ErrorComponent";
 
 const TopicsPage = () => {
 
@@ -20,7 +21,6 @@ const TopicsPage = () => {
   const [fetchTopics, isLoading, error] = useFetching(async () => {
     const response = await TopicService.getAll();
     setTopics(response.data)
-    error !== '' ? console.log(error) : console.log(response.data)
   })
   const sortedTopics = useSorting(topics, filter.sort, filter.query.toLowerCase())
 
@@ -40,6 +40,15 @@ const TopicsPage = () => {
     navigateToTopic(id)
   }
 
+
+  if(error){
+    console.log(error)
+    return(
+      
+        <ErrorComponent error={{message: 'Website is currently unavailable, please come back a little bit later'}}/>
+      
+    )
+  }
 
 
   return (

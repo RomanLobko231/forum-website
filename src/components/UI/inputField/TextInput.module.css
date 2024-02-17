@@ -14,7 +14,7 @@
 .input:active{
     outline: none;
     box-shadow: none;
-    }
+}
     
 .input:focus{
         outline: none;
@@ -26,5 +26,10 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+}
+
+.input:disabled{
+    outline: none;
+    box-shadow: none;
 }
 

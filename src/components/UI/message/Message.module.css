@@ -14,7 +14,15 @@
     white-space: pre-wrap
 }
 
-.header__text{
+.date{
+    margin: 0%;
     font-size: small;
     color: rgb(110, 110, 110);
+}
+
+.id{
+    margin: 0%;
+    font-size: x-small;
+    color: rgb(143, 143, 143);
+
 }

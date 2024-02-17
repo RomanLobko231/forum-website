@@ -58,6 +58,7 @@ const LoginContent = ({ setModalContentType, toggleModal }) => {
                     type='text'
                     autocomplete='off'
                     placeholder='Username'
+                    disabled={email}
                     registerName='username'
                     register={register}
                     errors={errors}
@@ -71,6 +72,7 @@ const LoginContent = ({ setModalContentType, toggleModal }) => {
                     type='text'
                     autocomplete='email'
                     placeholder='Email'
+                    disabled={username}
                     registerName='email'
                     register={register}
                     errors={errors}
@@ -91,15 +93,16 @@ const LoginContent = ({ setModalContentType, toggleModal }) => {
                     }
                     }
                 />
+                <p className={cl.forgot__password} onClick={() => setModalContentType("forgot_password")}>Forgot password?</p>
                 {isLoading
                     ? <TailSpin
                         visible={true}
-                        height="50"
-                        width="50"
+                        height="48"
+                        width="48"
                         color="#4285f4"
                         ariaLabel="tail-spin-loading"
                         radius="1"
-                        wrapperStyle={{ marginTop: '5%' }}
+                        wrapperStyle={{}}
                         wrapperClass=""
                     />
                     : <button className='button' disabled={isLoading} type='submit'>Sign In</button>

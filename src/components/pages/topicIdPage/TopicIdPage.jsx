@@ -28,7 +28,6 @@ const TopicIdPage = () => {
     const[fetchMessages, isMessagesLoading, msgError] = useFetching( async () => {
         const newMessages = await TopicService.getMessagesByTopicId(params.id);
         setMessages(newMessages.data)
-        msgError !== '' ? console.log("loh") : console.log("neloh")
     })
     
 
@@ -47,7 +46,6 @@ const TopicIdPage = () => {
     }
     
     if(error) {
-        console.log(error)
         return(
             <ErrorComponent error={error}/>
         )
@@ -58,10 +56,7 @@ const TopicIdPage = () => {
         <div className={cl.container}>
             <MessageModal visible={messageModal} setVisible={setMessageModal} createMessage={createMessage}/>
             <ImageModal visible={imageModal} setVisible={setImageModal} image={imageSrc}/>
-            {isLoading 
-            ? <TopicDescriptionLoader/>
-            : <TopicDescription topic={topic} setImage={setImage}/>
-            }
+            <TopicDescription topic={topic} setImage={setImage} isLoading={isLoading}/>
             {isMessagesLoading || isLoading
             ?  <MessageLoader/> 
             :  <MessagesPageDetails messages={messages} topic={topic} setMessageModal={setMessageModal} setImage={setImage}/>

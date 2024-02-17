@@ -2,6 +2,7 @@ import { BiLike, BiDislike, BiSolidLike, BiSolidDislike, BiCommentDetail } from 
 import cl from "./TopicBottomPanel.module.css"
 import TopicService from "../../../API/TopicService";
 import { useState } from "react";
+import { useAuth } from "../../../hooks/useAuth";
 
 const TopicBottomPanel = ({ topic }) => {
 
@@ -9,12 +10,21 @@ const TopicBottomPanel = ({ topic }) => {
   const [isDisliked, setIsDisliked] = useState(false)
   const [likes, setLikes] = useState(topic.likes)
   const [dislikes, setDislikes] = useState(topic.dislikes)
+  const { user } = useAuth();
 
   const setLike = async () => {
+
+    if(!user) {
+      alert("Only logged in users can like topics");
+      return;
+    };
+
     const updatedLikes = isLiked ? Math.max(likes - 1, 0) : topic.likes + 1;
     const updatedDislikes = isDisliked ? dislikes - 1 : topic.dislikes
 
     try {
+      
+      console.log(updatedLikes)
       await TopicService.updateLikesDislikes({likes: updatedLikes, dislikes: updatedDislikes, id: topic.id});
 
       setIsDisliked(false)
@@ -30,6 +40,11 @@ const TopicBottomPanel = ({ topic }) => {
   }
 
   const setDislike = async () => {
+
+    if(!user) {
+      alert("Only logged in users can dislike topics");
+      return;
+    };
 
     const updatedLikes = isLiked ? likes - 1 : topic.likes
     const updatedDislikes = isDisliked ? Math.max(dislikes - 1, 0) : topic.dislikes + 1;

@@ -11,7 +11,7 @@ export const useFetching = (callback) => {
             setError('')
         } catch (error) {
             setIsLoading(false)
-            setError(error.response.data);
+            error.response ? setError(error.response.data) : setError("Unknown error");
         } finally {
             setIsLoading(false)
         }

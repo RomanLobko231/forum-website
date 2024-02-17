@@ -14,7 +14,8 @@ const Message = ({message}) => {
   return (
     <div className={cl.container}>
       <div>
-        <p className={cl.header__text}>{formattedCreatedDate}<br/>id:{message.id}</p>
+        <p className={cl.date}>{formattedCreatedDate}</p>
+        <p className={cl.id}>id:{message.id}</p>
         <p className={cl.message__content}>{message.message}</p>
       </div>
     </div>
