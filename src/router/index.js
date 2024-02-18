@@ -1,4 +1,5 @@
 import MainPage from "../components/pages/mainPage/MainPage";
+import ResetPasswordPage from "../components/pages/resetPasswordPage/ResetPasswordPage";
 import TermsAndConditionsPage from "../components/pages/terms'n'conditions/TermsAndConditionsPage";
 import TopicIdPage from "../components/pages/topicIdPage/TopicIdPage";
 import TopicsPage from "../components/pages/topicsPage/TopicsPage";
@@ -12,7 +13,6 @@ export const routes = [
     {path: '/terms-conditions', component: <TermsAndConditionsPage/>, exact: true},
     {path: '/my-profile', component: <UserProfilePage/> , exact: true},
     {path: '/verify', component: <VerifyPage/> , exact: true},
+    {path: '/reset-password', component: <ResetPasswordPage/>, exact: true},
     {path: '*', component: <MainPage/> , exact: true}
-
-
 ]

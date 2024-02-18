@@ -10,7 +10,6 @@ import ErrorComponent from "../../UI/errorComponent/ErrorComponent";
 const VerifyPage = () => {
 
     const location = useLocation();
-    const [errors, setError] = useState('');
     const [verifyUser, isLoading, error] = useFetching(async (token) => {
         await AuthService.verifyUser(token);
     })

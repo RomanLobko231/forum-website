@@ -7,6 +7,7 @@ import { TailSpin } from 'react-loader-spinner';
 import InputError from '../inputError/InputError';
 import AuthService from '../../../API/AuthService';
 import { useFetching } from '../../../hooks/useFetching';
+import SubmitButton from '../submitButton/SubmitButton';
 
 const LoginContent = ({ setModalContentType, toggleModal }) => {
 
@@ -94,19 +95,8 @@ const LoginContent = ({ setModalContentType, toggleModal }) => {
                     }
                 />
                 <p className={cl.forgot__password} onClick={() => setModalContentType("forgot_password")}>Forgot password?</p>
-                {isLoading
-                    ? <TailSpin
-                        visible={true}
-                        height="48"
-                        width="48"
-                        color="#4285f4"
-                        ariaLabel="tail-spin-loading"
-                        radius="1"
-                        wrapperStyle={{}}
-                        wrapperClass=""
-                    />
-                    : <button className='button' disabled={isLoading} type='submit'>Sign In</button>
-                }
+                <SubmitButton isLoading={isLoading} buttonText="Sign In"/>
+                
             </form>
         </div>
     );

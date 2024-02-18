@@ -3,10 +3,11 @@ import cl from './LoginRegisterModal.module.css'
 import { useForm } from 'react-hook-form';
 import TextInput from '../inputField/TextInput';
 import InputError from '../inputError/InputError';
-import api from './../../../API/api';
+import api from '../../../API/api';
 import { TailSpin } from 'react-loader-spinner';
 import AuthService from '../../../API/AuthService';
 import { useFetching } from '../../../hooks/useFetching';
+import SubmitButton from '../submitButton/SubmitButton';
 
 
 const RegisterContent = ({ setModalContentType }) => {
@@ -104,19 +105,7 @@ const RegisterContent = ({ setModalContentType }) => {
                 />
                 <p>I accept <a href={ window.location.origin + '/terms-conditions'} target="_blank" rel="noopener noreferrer">terms and conditions</a></p>
                 </div>
-                {isLoading
-                ? <TailSpin
-                visible={true}
-                height="48"
-                width="48"
-                color="#4285f4"
-                ariaLabel="tail-spin-loading"
-                radius="1"
-                wrapperStyle={{ }}
-                wrapperClass=""
-            />
-                : <button className='button' disabled={isLoading} type='submit'>Sign Up</button>
-                }
+                <SubmitButton isLoading={isLoading} buttonText="Sign Up"/>
             </form>
 
         </div>

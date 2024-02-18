@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 import AppRouter from './components/pages/AppRouter';
 import Navbar from './components/UI/navbar/Navbar';
 import { ModalProvider } from './context/ModalProvider';
-import LoginRegisterModal from './components/UI/loginRegisterModal/LoginRegisterModal';
+import LoginRegisterModal from './components/UI/authModal/LoginRegisterModal';
 import { AuthProvider } from './hooks/useAuth';
 
 function App() {

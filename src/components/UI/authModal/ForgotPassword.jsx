@@ -3,17 +3,20 @@ import cl from './LoginRegisterModal.module.css'
 import TextInput from "../inputField/TextInput";
 import AuthService from "../../../API/AuthService";
 import { useFetching } from "../../../hooks/useFetching";
+import InputError from "../inputError/InputError";
+import { TailSpin } from "react-loader-spinner";
+import SubmitButton from "../submitButton/SubmitButton";
 
-const ForgotPassword = ({ setModalContentType, toggleModal}) => {
+const ForgotPassword = ({ setModalContentType, toggleModal }) => {
 
     const [sendResetEmail, isLoading, error] = useFetching(async (email) => {
-        await AuthService.sendResetEmail()
+        await AuthService.sendResetEmail(email)
         toggleModal();
         setModalContentType("login")
     })
 
-    const onSubmit = (email) => {
-        sendResetEmail(email)
+    const onSubmit = (data) => {
+        sendResetEmail(data.email)
     }
 
     const {
@@ -25,6 +28,7 @@ const ForgotPassword = ({ setModalContentType, toggleModal}) => {
         <div className={cl.container}>
             <form className={cl.container} onSubmit={handleSubmit(onSubmit)}>
                 <p>A link for password restoring will be send to your address:</p>
+                {error && <InputError errorMessage={error.message}/>}
                 <TextInput
                     type='text'
                     autocomplete='email'
@@ -37,7 +41,7 @@ const ForgotPassword = ({ setModalContentType, toggleModal}) => {
                     }
                     }
                 />
-                <button className='button' type='submit'>Send Email</button>
+                <SubmitButton isLoading={isLoading} buttonText="Send Email"/>
             </form>
         </div>
     );

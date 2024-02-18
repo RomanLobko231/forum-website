@@ -34,8 +34,8 @@ export default class AuthService{
         })
     }
 
-    static async sendNewPassword(token, newPassword){
-        return await api.post("/auth/reset-password" + {token: token, newPassword: newPassword})
+    static async sendNewPassword(resetPasswordInfo){
+        return await api.post("/auth/reset-password", resetPasswordInfo)
         .then((response) => {
             return(response)
         })
