@@ -4,7 +4,7 @@ const TEST_API_BASE_URL = 'http://localhost:8080';
 const PROD_API_BASE_URL = 'https://vatra.up.railway.app';
 
 const api = axios.create({
-  baseURL: TEST_API_BASE_URL,
+  baseURL: PROD_API_BASE_URL,
 });
 
 api.interceptors.request.use(
